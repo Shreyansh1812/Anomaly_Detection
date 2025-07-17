@@ -1,0 +1,57 @@
+# Default configuration for LogGuardian
+
+# General settings
+general:
+  log_level: INFO
+  temp_dir: ./temp
+  mode: inference  # Options: training, inference
+
+# Parser settings
+parser:
+  drain_parameters:
+    sim_th: 0.4
+    depth: 4
+    max_clusters: 1000
+  timestamp_format: '%Y-%m-%d %H:%M:%S'
+  use_trained_templates: true
+  template_model_path: ./models/template_models/drain3_model.pkl
+
+# Featurizer settings
+featurizer:
+  window_size: 60  # time window in minutes
+  features:
+    - template_count
+    - severity_distribution
+    - event_frequency
+    - session_length
+  use_trained_vectorizer: true
+  vectorizer_path: ./models/anomaly_models/vectorizer.pkl
+
+# Detector settings
+detector:
+  algorithm: isolation_forest  # Options: isolation_forest, lof, dbscan, autoencoder
+  parameters:
+    contamination: 0.05
+    n_estimators: 100
+    random_state: 42
+  threshold: 0.8
+  use_trained_model: true
+  model_path: ./models/anomaly_models/isolation_forest.pkl
+
+# Training settings
+training:
+  enabled: false  # Set to true to enable training mode
+  data_path: ./Data/raw_logs
+  train_test_split: 0.8
+  save_models: true
+  models_dir: ./models
+
+# Reporter settings
+reporter:
+  output_formats:
+    - csv
+    - json
+    - html
+  visualization:
+    enabled: true
+    max_anomalies_displayed: 50

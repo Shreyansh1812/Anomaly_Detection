@@ -1,0 +1,49 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Unit test / coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Data files
+data/processed/*
+!data/processed/.gitkeep
+
+# Model files
+models/*.pkl
+models/*.joblib
+
+# Reports
+reports/*
+!reports/.gitkeep
