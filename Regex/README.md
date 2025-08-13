@@ -1,3 +1,34 @@
+# Regex Pipeline
+
+End-to-end regex-only anomaly detection pipeline with actionable intel reporting.
+
+## Quick start
+
+Run the interactive report generator:
+
+```powershell
+python .\Scripts\generate_report.py
+```
+
+Or run directly with flags:
+
+```powershell
+python .\Scripts\analyze_log_pipeline.py --input "Data\raw_logs\HDFS_2k.log_structured.csv" --output "Reports\hdfs_report_intel.md" --template intel
+```
+
+Reports are written under `Regex/Reports/` by default.
+
+## Tests
+
+```powershell
+pytest -q
+```
+
+## Lint
+
+```powershell
+ruff check .
+```
 # LogGuardian (Regex-only)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Shreyansh1812/Anomaly_Detection/blob/feature/regex-analysis-only/Notebooks/Colab_Run_Report.ipynb)
