@@ -1,4 +1,33 @@
-# Python cache files
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# Data and artifacts
+Reports/
+models/
+Data/generated/
+Data/test_logs/
+Training Dataset/
+
+# Model artifacts
+*.joblib
+*.pkl
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+Thumbs.db
+.DS_Store# Python cache files
 __pycache__/
 *.py[cod]
 *$py.class
