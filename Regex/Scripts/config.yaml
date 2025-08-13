@@ -1,0 +1,94 @@
+reporting:
+  top_n_paths: 10
+  top_n_large_paths: 5
+  top_n_user_agents: 5
+
+thresholds:
+  large_response_bytes: 1048576
+  exfil_bytes_per_minute: 5242880
+  uncommon_method_error_min: 1
+  bruteforce:
+    failure_statuses: [401, 403]
+    window_minutes: 5
+    attempts_threshold: 10
+  high_freq:
+    requests_per_minute_threshold: 120
+
+patterns:
+  sensitive_paths: ["/admin", "/wp-admin", "/.git", "/config", "/etc/passwd"]
+  malicious_user_agents: ["sqlmap", "nikto", "acunetix"]
+  login_paths: ["/login", "/signin"]
+
+# Custom error patterns (Layer 3)
+# Add domain-specific categories and regexes. Keys become categories in the report.
+custom_error_patterns:
+  hdfs_data_errors:
+    - '(corrupt block|checksum mismatch|CorruptBlocks|MissingBlocks)'
+    - 'Failed to place recovery for block'
+  hdfs_service_errors:
+    - '(NameNode is in safe mode|heartbeat lost|datanode.*shutdown)'
+    - '(cannot connect to.*namenode|Re-entering safe mode)'
+  # Linux auth/SSH patterns to boost recall on Linux_2k dataset
+  linux_auth_errors:
+    - '(?i)Failed password for (invalid user )?.+ from [\d.:]+'
+    - '(?i)Invalid user \S+ from [\d.:]+'
+    - '(?i)PAM (authentication|account) failure'
+    - '(?i)sudo: .* authentication failure'
+    - '(?i)authentication failure(?:;|\b)'
+    - '(?i)Authentication failed'
+  linux_ssh_connection_issues:
+    - '(?i)Connection closed by .* port \d+'
+    - '(?i)Disconnected from .* port \d+'
+    - '(?i)Did not receive identification string from .*?'
+    - '(?i)reverse mapping checking getaddrinfo.* failed'
+  linux_ssh_bruteforce:
+    - '(?i)Too many authentication failures'
+    - '(?i)maximum authentication attempts exceeded'
+
+  # Apache-specific patterns for web logs (no code changes needed)
+  apache_client_errors:
+    # Match 4xx status codes typically appearing after the quoted request
+    - '(?i)"\s*4[0-9]{2}\b'
+    - '(?i)\s4[0-9]{2}\s'
+  apache_server_errors:
+    # Match 5xx status codes
+    - '(?i)"\s*5[0-9]{2}\b'
+    - '(?i)\s5[0-9]{2}\s'
+  apache_suspicious_paths:
+    - '(?i)\bwp-admin\b'
+    - '(?i)\.(?:git)(?:/|\\)config\b'
+    - '(?i)(?:\.{2}|%2e%2e)+(?:/|%2f|\\|%5c)*(?:etc|%65%74%63)(?:/|%2f)*(?:passwd|%70%61%73%73%77%64)'
+    - '(?i)/etc/passwd'
+  apache_scanner_user_agents:
+    - '(?i)\b(?:nikto|nmap|sqlmap)\b'
+  apache_error_log_issues:
+    - '(?i)mod_jk\s+child\s+workerEnv\s+in\s+error\s+state\s+\d+'
+    - '(?i)child\s+process\s+\d+\s+exited\s+with\s+status\s+\d+'
+    - '(?i)(segmentation\s+fault|seg\s+fault|signal\s+\d+)'
+    - '(?i)server\s+reached\s+(?:MaxClients|MaxRequestWorkers)'
+    - '(?i)file\s+does\s+not\s+exist:'
+    - '(?i)client\s+denied\s+by\s+server\s+configuration'
+    - '(?i)script\s+not\s+found\s+or\s+unable\s+to\s+stat'
+
+  # Synthetic dataset patterns mapped from user-provided detector
+  brute_force:
+    - '(?i)Failed\s+password\s+for\s+user\s+[\'\"]?(?:admin|root|test|[a-zA-Z0-9_\-]+)[\'\"]?'
+    - '(?i)Invalid\s+user\s+[a-zA-Z0-9_\-]+'
+  web_attack:
+    - '(?i)/etc/passwd'
+    - '(?i)(?:\.\./|\.\.\%2f|%2Fetc%2Fshadow)'
+    - '(?i)boot\.ini'
+    - '(?i)select\s+\*\s+from'
+    - '(?i)union\s+select'
+    - '(?i)nikto\s+scan\s+detected'
+    - '(?i)\' or \'1\'=\'1'
+    - '(?i)%27%20or%20%271%27%3D%271'
+  malicious_ip:
+    - '198\.167\.140\.21'
+  application_error:
+    - '(?i)database\s+connection\s+timed\s+out'
+    - '(?i)php-fpm.*sigsegv'
+    - '(?i)nullpointerexception'
+    - '(?i)configerror'
+    - '(?i)unexpected\s+token'
+    - '(?i)kafka\s+producer\s+flush\s+failed'

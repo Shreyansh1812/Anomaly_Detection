@@ -1,0 +1,1001 @@
+Timestamp,Level,Source_IP,Message
+2025-07-01 00:01:46,INFO,81.171.173.80,Session refreshed for user 'api-service'
+2025-07-01 00:05:20,INFO,130.200.168.241,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 00:10:11,INFO,222.244.49.40,User 'api-service' logged out
+2025-07-01 00:17:15,INFO,20.165.172.67,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 00:35:21,INFO,174.154.223.77,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 00:42:21,INFO,144.241.190.112,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 00:44:28,INFO,26.95.40.178,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 00:44:33,INFO,86.209.122.132,User 'api-service' logged out
+2025-07-01 00:48:13,INFO,143.120.242.201,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 00:50:09,INFO,197.20.204.215,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 00:57:25,INFO,185.136.147.147,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 01:02:45,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 01:05:38,INFO,141.197.103.36,Session refreshed for user 'bob'
+2025-07-01 01:06:53,INFO,187.197.222.93,User 'admin' logged out
+2025-07-01 01:11:00,INFO,94.82.134.92,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 01:11:35,INFO,170.159.181.138,Successful login for user 'bob'
+2025-07-01 01:16:21,INFO,170.159.181.138,Successful login for user 'alice'
+2025-07-01 01:19:15,INFO,170.159.181.138,File access: /var/www/main.css
+2025-07-01 01:36:20,INFO,146.208.123.39,Successful login for user 'alice'
+2025-07-01 01:38:18,INFO,211.75.38.11,Session refreshed for user 'bob'
+2025-07-01 01:38:43,INFO,23.52.124.163,Session refreshed for user 'admin'
+2025-07-01 01:44:06,INFO,99.214.231.28,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 01:45:33,INFO,34.150.240.22,Successful login for user 'api-service'
+2025-07-01 01:50:22,INFO,142.155.76.140,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 01:53:45,INFO,15.48.68.41,User 'admin' logged out
+2025-07-01 01:54:30,INFO,124.26.145.192,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 02:03:28,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 02:04:54,INFO,93.91.166.75,User 'alice' logged out
+2025-07-01 02:06:03,INFO,130.32.92.0,File access: /var/www/index.html
+2025-07-01 02:06:38,INFO,150.111.149.125,User 'api-service' logged out
+2025-07-01 02:07:09,INFO,218.210.21.11,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 02:07:29,INFO,88.235.148.86,User 'bob' logged out
+2025-07-01 02:08:17,INFO,139.135.139.109,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 02:08:53,INFO,54.43.184.73,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 02:09:04,INFO,88.65.213.136,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 02:09:28,INFO,170.159.181.138,User 'charlie' logged out
+2025-07-01 02:10:23,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 02:10:46,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 02:11:10,INFO,9.33.98.49,Session refreshed for user 'api-service'
+2025-07-01 02:14:04,INFO,91.140.132.137,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 02:14:06,INFO,64.95.23.156,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 02:17:19,INFO,4.249.4.104,File access: /var/www/index.html
+2025-07-01 02:17:41,INFO,67.128.189.198,Successful login for user 'alice'
+2025-07-01 02:19:56,INFO,87.219.131.171,Session refreshed for user 'charlie'
+2025-07-01 02:20:06,INFO,114.224.60.244,User 'testuser' logged out
+2025-07-01 02:21:03,INFO,170.159.181.138,File access: /var/www/contact.html
+2025-07-01 02:21:45,INFO,201.200.151.126,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 02:22:45,INFO,170.159.181.138,Successful login for user 'alice'
+2025-07-01 02:23:41,INFO,85.133.110.221,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 02:25:20,INFO,107.219.87.209,Successful login for user 'admin'
+2025-07-01 02:25:22,INFO,212.77.254.186,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 02:25:50,INFO,170.159.181.138,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 02:27:05,INFO,92.218.89.116,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 02:28:18,INFO,85.3.14.6,User 'bob' logged out
+2025-07-01 02:28:23,INFO,121.214.15.129,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 02:30:49,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 02:32:07,INFO,166.75.74.67,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 02:35:36,INFO,42.151.43.27,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 02:36:05,INFO,208.180.178.77,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 02:37:24,INFO,219.113.143.7,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 02:39:26,INFO,128.219.59.37,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 02:40:17,INFO,219.72.233.27,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 02:40:21,INFO,203.42.71.182,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 02:47:38,INFO,22.131.122.72,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 02:47:50,INFO,208.140.130.210,User 'bob' logged out
+2025-07-01 02:51:09,INFO,114.208.36.239,User 'testuser' logged out
+2025-07-01 02:53:51,INFO,170.159.181.138,Successful login for user 'api-service'
+2025-07-01 02:55:21,INFO,129.14.203.238,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 02:55:55,INFO,43.30.82.104,User 'testuser' logged out
+2025-07-01 02:56:21,INFO,29.203.188.119,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 02:59:28,INFO,193.232.81.192,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 03:01:22,INFO,116.10.234.74,User 'admin' logged out
+2025-07-01 03:07:54,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 03:07:57,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 03:08:15,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 03:08:45,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 03:09:12,INFO,170.159.181.138,Session refreshed for user 'api-service'
+2025-07-01 03:10:35,INFO,105.92.219.108,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 03:11:23,INFO,170.159.181.138,File access: /var/www/contact.html
+2025-07-01 03:14:07,INFO,144.152.23.190,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 03:17:45,INFO,101.200.40.86,Session refreshed for user 'testuser'
+2025-07-01 03:18:24,INFO,32.115.161.65,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 03:19:53,INFO,170.159.181.138,Successful login for user 'bob'
+2025-07-01 03:20:19,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 03:20:42,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 03:20:55,INFO,188.194.57.196,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 03:23:41,INFO,219.117.186.60,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 03:24:06,INFO,184.36.80.76,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 03:25:01,INFO,87.162.102.237,File access: /var/www/contact.html
+2025-07-01 03:26:53,INFO,162.139.183.45,Session refreshed for user 'bob'
+2025-07-01 03:31:30,INFO,62.26.27.231,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 03:35:50,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 03:37:56,INFO,206.103.192.44,File access: /var/www/app.js
+2025-07-01 03:38:09,INFO,182.26.231.46,File access: /var/www/app.js
+2025-07-01 03:47:28,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 03:47:40,INFO,159.145.84.178,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 03:53:19,INFO,206.179.121.250,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 03:54:40,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 03:57:02,INFO,126.180.99.249,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 03:57:50,INFO,170.159.181.138,File access: /var/www/contact.html
+2025-07-01 04:01:41,INFO,146.10.102.117,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 04:02:10,INFO,13.138.122.223,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 04:02:29,INFO,38.213.162.70,File access: /var/www/app.js
+2025-07-01 04:02:52,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 04:03:46,INFO,130.22.231.95,Successful login for user 'api-service'
+2025-07-01 04:03:51,INFO,66.34.124.26,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 04:04:35,INFO,196.184.51.43,Successful login for user 'api-service'
+2025-07-01 04:09:22,INFO,58.218.71.185,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 04:09:55,INFO,136.189.214.25,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 04:10:04,INFO,54.236.25.174,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 04:12:30,INFO,6.212.166.5,Session refreshed for user 'admin'
+2025-07-01 04:13:10,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 04:13:24,INFO,93.25.31.45,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 04:14:15,INFO,156.56.37.176,Session refreshed for user 'alice'
+2025-07-01 04:15:22,INFO,135.184.15.200,Successful login for user 'bob'
+2025-07-01 04:17:01,INFO,98.153.226.26,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 04:17:13,INFO,174.131.154.1,Successful login for user 'api-service'
+2025-07-01 04:17:20,INFO,200.93.247.156,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 04:19:17,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 04:19:40,INFO,204.65.34.33,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 04:20:25,INFO,168.155.39.113,Session refreshed for user 'bob'
+2025-07-01 04:22:10,INFO,175.240.194.147,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 04:22:40,INFO,170.159.181.138,File access: /var/www/app.js
+2025-07-01 04:29:05,INFO,219.242.245.109,Session refreshed for user 'api-service'
+2025-07-01 04:30:16,INFO,150.53.36.44,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 04:30:26,INFO,6.83.102.155,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 04:31:11,INFO,170.159.181.138,Session refreshed for user 'api-service'
+2025-07-01 04:33:02,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 04:34:20,INFO,197.181.32.90,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 04:36:52,INFO,93.89.14.71,File access: /var/www/main.css
+2025-07-01 04:41:11,INFO,119.232.8.137,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 04:41:32,INFO,117.198.110.75,Successful login for user 'testuser'
+2025-07-01 04:42:02,INFO,2.126.5.89,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 04:42:41,INFO,170.159.181.138,User 'alice' logged out
+2025-07-01 04:42:57,INFO,77.133.30.17,File access: /var/www/contact.html
+2025-07-01 04:46:10,INFO,84.160.209.178,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 04:47:24,INFO,113.232.191.188,User 'admin' logged out
+2025-07-01 04:47:42,INFO,49.24.203.65,Session refreshed for user 'charlie'
+2025-07-01 04:49:28,INFO,126.55.13.130,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 04:49:48,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 04:56:50,INFO,170.159.181.138,User 'alice' logged out
+2025-07-01 04:57:14,INFO,58.175.30.240,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 04:58:23,INFO,212.229.205.186,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 04:58:32,INFO,138.9.132.84,Successful login for user 'testuser'
+2025-07-01 05:01:59,INFO,39.134.20.115,File access: /var/www/contact.html
+2025-07-01 05:02:40,INFO,104.62.39.234,Successful login for user 'bob'
+2025-07-01 05:03:47,INFO,219.217.23.97,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 05:05:32,INFO,45.72.167.114,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 05:08:11,INFO,100.177.50.178,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 05:08:11,INFO,126.124.145.228,Session refreshed for user 'alice'
+2025-07-01 05:10:42,INFO,92.230.230.166,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 05:12:25,INFO,170.159.181.138,File access: /var/www/contact.html
+2025-07-01 05:15:32,INFO,152.208.185.188,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 05:22:26,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 05:26:14,INFO,83.50.0.251,File access: /var/www/contact.html
+2025-07-01 05:31:40,INFO,170.159.181.138,User 'alice' logged out
+2025-07-01 05:39:03,INFO,160.63.43.13,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 05:44:27,INFO,170.159.181.138,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 05:49:09,INFO,91.248.17.93,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 05:49:17,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 05:52:49,INFO,70.18.85.117,Successful login for user 'alice'
+2025-07-01 05:55:25,INFO,212.124.201.191,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 05:55:46,INFO,132.148.229.219,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 05:56:53,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 06:05:47,INFO,161.230.238.182,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 06:06:07,INFO,217.30.8.227,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 06:06:13,INFO,34.13.231.119,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 06:11:15,INFO,170.159.181.138,Session refreshed for user 'charlie'
+2025-07-01 06:14:43,INFO,31.7.6.231,User 'charlie' logged out
+2025-07-01 06:21:59,INFO,208.183.220.189,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 06:22:30,INFO,195.204.229.210,File access: /var/www/index.html
+2025-07-01 06:24:03,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 06:29:37,INFO,118.14.238.24,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 06:30:20,INFO,109.214.252.46,User 'charlie' logged out
+2025-07-01 06:33:23,INFO,22.235.72.90,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 06:33:46,INFO,85.39.128.177,User 'alice' logged out
+2025-07-01 06:48:01,INFO,36.240.173.5,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 06:48:59,INFO,79.174.74.156,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 06:50:02,INFO,39.54.100.125,User 'alice' logged out
+2025-07-01 06:55:50,INFO,50.212.41.164,Session refreshed for user 'charlie'
+2025-07-01 06:55:51,INFO,170.159.181.138,File access: /var/www/main.css
+2025-07-01 06:57:30,INFO,57.8.181.252,Successful login for user 'alice'
+2025-07-01 06:58:29,INFO,5.71.75.17,File access: /var/www/contact.html
+2025-07-01 07:01:21,INFO,154.90.99.109,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 07:04:09,INFO,49.103.190.89,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 07:04:41,INFO,166.152.46.173,Successful login for user 'testuser'
+2025-07-01 07:05:49,INFO,143.163.25.199,File access: /var/www/main.css
+2025-07-01 07:07:55,INFO,170.159.181.138,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 07:21:44,INFO,98.138.231.36,User 'api-service' logged out
+2025-07-01 07:23:40,INFO,210.182.150.239,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 07:30:29,INFO,186.90.188.91,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 07:30:47,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 07:38:35,INFO,16.252.113.172,Session refreshed for user 'api-service'
+2025-07-01 07:39:54,INFO,170.159.181.138,Successful login for user 'testuser'
+2025-07-01 07:40:43,INFO,175.209.62.94,File access: /var/www/main.css
+2025-07-01 07:47:26,INFO,32.63.164.76,Session refreshed for user 'bob'
+2025-07-01 07:49:23,INFO,44.111.93.90,Session refreshed for user 'admin'
+2025-07-01 07:50:55,INFO,109.124.24.47,Session refreshed for user 'alice'
+2025-07-01 08:02:49,INFO,133.193.204.74,File access: /var/www/main.css
+2025-07-01 08:05:02,INFO,45.180.157.122,Session refreshed for user 'bob'
+2025-07-01 08:09:48,INFO,118.58.254.117,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 08:17:19,INFO,11.106.119.71,User 'api-service' logged out
+2025-07-01 08:17:56,INFO,170.159.181.138,User 'testuser' logged out
+2025-07-01 08:19:45,INFO,28.145.204.134,User 'alice' logged out
+2025-07-01 08:25:47,INFO,44.69.87.193,User 'charlie' logged out
+2025-07-01 08:33:03,INFO,170.159.181.138,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 08:33:36,INFO,154.172.0.10,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 08:42:24,INFO,223.143.131.116,Successful login for user 'charlie'
+2025-07-01 08:42:40,INFO,214.0.151.137,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 08:57:59,INFO,157.16.146.199,File access: /var/www/app.js
+2025-07-01 09:00:42,INFO,205.175.128.184,Successful login for user 'admin'
+2025-07-01 09:00:52,INFO,117.205.6.4,Successful login for user 'alice'
+2025-07-01 09:00:58,INFO,87.187.59.84,Successful login for user 'testuser'
+2025-07-01 09:01:39,INFO,103.146.203.23,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 09:01:51,INFO,91.242.183.84,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 09:01:53,INFO,23.140.138.240,Session refreshed for user 'charlie'
+2025-07-01 09:02:21,INFO,220.48.98.165,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 09:02:26,INFO,170.159.181.138,User 'admin' logged out
+2025-07-01 09:03:18,INFO,132.101.145.181,File access: /var/www/index.html
+2025-07-01 09:04:04,INFO,36.136.178.84,User 'charlie' logged out
+2025-07-01 09:05:41,INFO,162.205.224.53,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 09:06:14,INFO,163.223.12.60,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 09:08:15,INFO,38.73.31.141,Session refreshed for user 'testuser'
+2025-07-01 09:08:32,INFO,74.123.146.2,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 09:09:33,INFO,170.159.181.138,Successful login for user 'bob'
+2025-07-01 09:09:51,INFO,170.159.181.138,Session refreshed for user 'testuser'
+2025-07-01 09:09:59,INFO,16.230.182.40,Session refreshed for user 'alice'
+2025-07-01 09:10:11,INFO,170.159.181.138,User 'testuser' logged out
+2025-07-01 09:10:33,INFO,11.166.144.198,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 09:10:42,INFO,72.112.189.29,File access: /var/www/main.css
+2025-07-01 09:10:47,INFO,120.151.194.216,User 'alice' logged out
+2025-07-01 09:11:12,INFO,170.159.181.138,Successful login for user 'charlie'
+2025-07-01 09:11:33,INFO,100.158.242.198,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 09:11:59,INFO,170.159.181.138,Successful login for user 'api-service'
+2025-07-01 09:13:07,INFO,56.212.251.214,File access: /var/www/contact.html
+2025-07-01 09:13:25,INFO,170.159.181.138,Successful login for user 'alice'
+2025-07-01 09:13:40,INFO,142.192.237.222,File access: /var/www/index.html
+2025-07-01 09:14:52,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 09:14:55,INFO,90.165.11.42,File access: /var/www/contact.html
+2025-07-01 09:14:56,INFO,18.231.234.71,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 09:15:21,INFO,77.138.202.182,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 09:15:44,INFO,170.159.181.138,User 'testuser' logged out
+2025-07-01 09:15:53,INFO,91.47.104.231,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 09:16:07,INFO,215.147.23.159,Successful login for user 'testuser'
+2025-07-01 09:16:47,INFO,203.54.95.18,User 'charlie' logged out
+2025-07-01 09:17:09,INFO,94.39.225.15,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 09:18:01,INFO,64.214.162.68,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 09:18:24,INFO,170.159.181.138,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 09:18:30,INFO,188.231.70.35,Session refreshed for user 'charlie'
+2025-07-01 09:19:21,INFO,170.159.181.138,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 09:21:27,INFO,129.85.174.116,Session refreshed for user 'testuser'
+2025-07-01 09:21:50,INFO,164.152.14.215,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 09:21:54,INFO,168.58.247.121,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 09:22:06,INFO,53.254.65.165,User 'api-service' logged out
+2025-07-01 09:23:24,INFO,63.192.116.71,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 09:23:54,INFO,14.214.186.178,Session refreshed for user 'api-service'
+2025-07-01 09:23:59,INFO,211.75.222.8,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 09:24:20,INFO,39.31.234.213,Session refreshed for user 'charlie'
+2025-07-01 09:24:58,INFO,63.120.235.143,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 09:25:02,INFO,137.251.14.215,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 09:25:02,INFO,181.28.254.168,Session refreshed for user 'admin'
+2025-07-01 09:25:02,INFO,145.236.241.117,Successful login for user 'alice'
+2025-07-01 09:26:14,INFO,81.240.41.68,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 09:26:19,INFO,93.66.35.166,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 09:26:21,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 09:26:23,INFO,91.147.17.77,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 09:27:47,INFO,170.159.181.138,User 'admin' logged out
+2025-07-01 09:27:49,INFO,223.150.234.242,File access: /var/www/app.js
+2025-07-01 09:27:58,INFO,40.100.29.52,File access: /var/www/contact.html
+2025-07-01 09:29:40,INFO,200.28.21.134,Successful login for user 'api-service'
+2025-07-01 09:30:34,INFO,208.147.244.146,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 09:31:13,INFO,170.159.181.138,File access: /var/www/contact.html
+2025-07-01 09:31:16,INFO,170.159.181.138,File access: /var/www/app.js
+2025-07-01 09:33:12,INFO,170.159.181.138,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 09:33:24,INFO,147.91.247.84,Successful login for user 'bob'
+2025-07-01 09:33:27,INFO,1.192.201.180,File access: /var/www/index.html
+2025-07-01 09:33:29,INFO,90.20.58.56,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 09:33:32,INFO,133.8.187.7,Session refreshed for user 'api-service'
+2025-07-01 09:35:22,INFO,158.57.153.26,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 09:36:02,INFO,155.31.133.119,User 'testuser' logged out
+2025-07-01 09:36:23,INFO,76.198.185.24,User 'bob' logged out
+2025-07-01 09:36:35,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 09:38:01,INFO,170.159.181.138,Successful login for user 'bob'
+2025-07-01 09:39:23,INFO,125.144.117.132,File access: /var/www/index.html
+2025-07-01 09:39:31,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 09:39:42,INFO,112.118.144.77,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 09:39:43,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 09:39:44,INFO,95.31.244.56,User 'testuser' logged out
+2025-07-01 09:39:56,INFO,177.9.21.150,Session refreshed for user 'api-service'
+2025-07-01 09:40:04,INFO,114.65.239.20,File access: /var/www/app.js
+2025-07-01 09:40:22,INFO,12.207.53.88,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 09:40:29,INFO,31.20.215.128,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 09:40:32,INFO,24.82.56.12,User 'charlie' logged out
+2025-07-01 09:40:44,INFO,67.39.129.200,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 09:40:50,INFO,170.159.181.138,File access: /var/www/main.css
+2025-07-01 09:42:09,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 09:42:12,INFO,160.16.159.246,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 09:42:40,INFO,39.237.46.194,File access: /var/www/app.js
+2025-07-01 09:43:10,INFO,153.93.86.53,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 09:43:28,INFO,170.159.181.138,Session refreshed for user 'alice'
+2025-07-01 09:43:37,INFO,33.194.83.141,File access: /var/www/contact.html
+2025-07-01 09:43:41,INFO,170.159.181.138,User 'api-service' logged out
+2025-07-01 09:44:23,INFO,149.55.246.234,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 09:44:45,INFO,144.7.148.255,Session refreshed for user 'bob'
+2025-07-01 09:44:54,INFO,138.231.157.12,File access: /var/www/app.js
+2025-07-01 09:46:11,INFO,66.4.102.134,User 'alice' logged out
+2025-07-01 09:47:02,INFO,73.202.174.32,User 'api-service' logged out
+2025-07-01 09:48:35,INFO,18.245.178.215,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 09:48:53,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 09:49:19,INFO,156.74.206.81,Session refreshed for user 'api-service'
+2025-07-01 09:49:29,INFO,49.90.24.165,User 'alice' logged out
+2025-07-01 09:50:09,INFO,12.168.183.24,Session refreshed for user 'charlie'
+2025-07-01 09:50:50,INFO,23.167.58.159,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 09:51:03,INFO,170.159.181.138,File access: /var/www/app.js
+2025-07-01 09:51:10,INFO,91.240.195.10,User 'alice' logged out
+2025-07-01 09:51:50,INFO,31.125.13.122,Successful login for user 'bob'
+2025-07-01 09:51:57,INFO,47.57.252.194,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 09:52:30,INFO,172.13.180.107,Successful login for user 'charlie'
+2025-07-01 09:54:09,INFO,14.90.194.158,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 09:54:10,INFO,30.172.64.204,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 09:54:34,INFO,219.206.82.70,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 09:54:46,INFO,170.159.181.138,File access: /var/www/main.css
+2025-07-01 09:55:09,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 09:55:25,INFO,170.159.181.138,User 'alice' logged out
+2025-07-01 09:56:46,INFO,92.126.222.176,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 09:56:51,INFO,175.123.9.5,Session refreshed for user 'alice'
+2025-07-01 09:58:45,INFO,47.182.83.166,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 09:58:46,INFO,167.203.86.77,Session refreshed for user 'admin'
+2025-07-01 09:59:20,INFO,142.255.156.39,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 09:59:58,INFO,200.197.125.80,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 10:01:55,INFO,170.159.181.138,Session refreshed for user 'api-service'
+2025-07-01 10:02:25,INFO,163.217.131.121,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 10:03:07,INFO,170.159.181.138,Successful login for user 'alice'
+2025-07-01 10:03:29,INFO,170.159.181.138,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 10:03:44,INFO,173.15.239.120,Successful login for user 'bob'
+2025-07-01 10:04:07,INFO,158.38.249.65,Successful login for user 'charlie'
+2025-07-01 10:04:50,INFO,162.195.178.64,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 10:05:29,INFO,103.115.48.146,Successful login for user 'api-service'
+2025-07-01 10:05:43,INFO,29.183.119.174,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 10:07:47,INFO,82.156.220.45,File access: /var/www/main.css
+2025-07-01 10:08:49,INFO,97.58.49.34,File access: /var/www/app.js
+2025-07-01 10:09:01,INFO,199.135.32.184,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 10:09:31,INFO,157.2.93.198,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 10:09:34,INFO,42.63.228.177,User 'testuser' logged out
+2025-07-01 10:09:52,INFO,16.192.174.244,File access: /var/www/app.js
+2025-07-01 10:09:53,INFO,64.30.205.226,File access: /var/www/main.css
+2025-07-01 10:09:56,INFO,178.31.154.63,File access: /var/www/index.html
+2025-07-01 10:10:03,INFO,194.92.180.170,File access: /var/www/contact.html
+2025-07-01 10:11:36,INFO,36.57.240.27,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 10:14:02,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 10:14:38,INFO,161.190.56.110,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 10:15:26,INFO,210.211.96.111,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 10:16:07,INFO,82.74.177.156,File access: /var/www/app.js
+2025-07-01 10:16:43,INFO,33.238.50.128,Session refreshed for user 'admin'
+2025-07-01 10:16:56,INFO,66.140.168.125,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 10:18:31,INFO,213.29.44.116,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 10:19:43,INFO,76.251.70.204,Successful login for user 'api-service'
+2025-07-01 10:20:49,INFO,12.56.205.40,File access: /var/www/main.css
+2025-07-01 10:21:27,INFO,213.248.243.40,File access: /var/www/contact.html
+2025-07-01 10:21:36,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 10:21:59,INFO,166.9.89.51,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 10:22:24,INFO,204.96.232.46,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 10:22:38,INFO,90.60.107.141,Session refreshed for user 'testuser'
+2025-07-01 10:23:09,INFO,204.139.89.112,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 10:24:00,INFO,170.159.181.138,Session refreshed for user 'bob'
+2025-07-01 10:24:27,INFO,192.98.222.221,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 10:25:39,INFO,174.4.11.104,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 10:25:47,INFO,55.145.115.93,Session refreshed for user 'bob'
+2025-07-01 10:26:05,INFO,60.53.29.57,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 10:27:24,INFO,87.190.17.61,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 10:27:24,INFO,221.236.3.2,Session refreshed for user 'testuser'
+2025-07-01 10:27:44,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 10:28:08,INFO,121.53.6.39,Session refreshed for user 'charlie'
+2025-07-01 10:28:24,INFO,124.139.20.59,Session refreshed for user 'bob'
+2025-07-01 10:28:44,INFO,171.1.3.183,User 'bob' logged out
+2025-07-01 10:28:59,INFO,37.211.24.143,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 10:29:07,INFO,25.143.199.122,Successful login for user 'bob'
+2025-07-01 10:29:18,INFO,170.159.181.138,File access: /var/www/main.css
+2025-07-01 10:29:37,INFO,139.183.104.235,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 10:29:48,INFO,108.34.188.63,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 10:30:48,INFO,50.142.88.177,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 10:32:24,INFO,71.38.17.56,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 10:32:37,INFO,70.205.95.122,File access: /var/www/index.html
+2025-07-01 10:33:08,INFO,41.220.95.76,Successful login for user 'alice'
+2025-07-01 10:33:14,INFO,140.213.20.3,File access: /var/www/contact.html
+2025-07-01 10:33:47,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 10:34:07,INFO,164.142.99.216,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 10:34:18,INFO,80.246.44.200,Successful login for user 'alice'
+2025-07-01 10:34:40,INFO,221.62.200.153,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 10:35:53,INFO,170.159.181.138,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 10:35:57,INFO,143.44.120.171,Session refreshed for user 'testuser'
+2025-07-01 10:36:08,INFO,121.59.208.115,Successful login for user 'bob'
+2025-07-01 10:36:19,INFO,133.43.182.163,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 10:36:39,INFO,139.17.249.234,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 10:37:04,INFO,180.232.8.103,Successful login for user 'bob'
+2025-07-01 10:37:39,INFO,163.91.76.209,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 10:39:06,INFO,170.159.181.138,File access: /var/www/main.css
+2025-07-01 10:39:06,INFO,170.159.181.138,User 'charlie' logged out
+2025-07-01 10:39:42,INFO,170.159.181.138,Session refreshed for user 'alice'
+2025-07-01 10:39:45,INFO,16.171.172.219,User 'api-service' logged out
+2025-07-01 10:40:22,INFO,6.218.217.21,Successful login for user 'testuser'
+2025-07-01 10:40:27,INFO,59.227.95.21,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 10:40:34,INFO,170.159.181.138,Successful login for user 'admin'
+2025-07-01 10:40:47,INFO,121.159.121.219,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 10:41:39,INFO,144.137.168.56,File access: /var/www/index.html
+2025-07-01 10:42:13,INFO,221.60.161.248,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 10:42:17,INFO,48.254.183.49,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 10:42:30,INFO,81.104.65.15,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 10:45:05,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 10:45:08,INFO,81.85.195.81,Successful login for user 'bob'
+2025-07-01 10:45:42,INFO,214.227.22.237,Successful login for user 'alice'
+2025-07-01 10:46:25,INFO,88.159.73.144,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 10:47:42,INFO,170.159.181.138,Successful login for user 'testuser'
+2025-07-01 10:47:48,INFO,115.101.16.97,User 'alice' logged out
+2025-07-01 10:48:02,INFO,20.208.127.13,Session refreshed for user 'testuser'
+2025-07-01 10:49:21,INFO,72.121.159.106,Successful login for user 'bob'
+2025-07-01 10:51:41,INFO,71.254.194.4,File access: /var/www/contact.html
+2025-07-01 10:51:44,INFO,13.19.139.244,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 10:52:39,INFO,69.198.216.113,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 10:53:13,INFO,118.103.5.126,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 10:53:27,INFO,20.190.20.73,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 10:53:33,INFO,22.56.152.118,Successful login for user 'api-service'
+2025-07-01 10:53:39,INFO,119.203.122.115,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 10:53:53,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 10:54:07,INFO,205.44.131.244,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 10:54:36,INFO,190.83.137.193,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 10:55:10,INFO,38.166.152.243,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 10:55:30,INFO,109.61.27.123,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 10:55:46,INFO,154.102.207.76,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 10:56:31,INFO,184.128.36.199,User 'bob' logged out
+2025-07-01 10:56:40,INFO,36.128.111.6,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 10:56:56,INFO,172.112.124.188,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 10:57:08,INFO,170.159.181.138,File access: /var/www/contact.html
+2025-07-01 10:57:29,INFO,46.182.92.141,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 10:59:28,INFO,41.108.19.45,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 10:59:50,INFO,163.209.25.68,User 'bob' logged out
+2025-07-01 11:00:26,INFO,122.242.32.22,User 'testuser' logged out
+2025-07-01 11:01:28,INFO,123.19.243.169,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 11:01:30,INFO,173.235.128.123,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 11:02:18,INFO,88.102.15.16,Session refreshed for user 'bob'
+2025-07-01 11:02:39,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 11:04:29,INFO,123.24.175.30,File access: /var/www/app.js
+2025-07-01 11:05:11,INFO,170.159.181.138,User 'admin' logged out
+2025-07-01 11:05:16,INFO,201.240.184.132,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 11:05:26,INFO,85.26.202.180,Session refreshed for user 'bob'
+2025-07-01 11:05:40,INFO,94.111.173.186,File access: /var/www/main.css
+2025-07-01 11:05:51,INFO,62.224.179.86,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 11:05:58,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 11:07:29,INFO,38.2.136.4,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 11:07:41,INFO,154.81.43.64,File access: /var/www/app.js
+2025-07-01 11:08:06,INFO,77.68.134.209,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 11:08:11,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 11:09:38,INFO,59.246.1.242,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 11:09:47,INFO,211.192.215.240,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 11:10:03,INFO,44.220.6.233,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 11:10:08,INFO,170.159.181.138,Successful login for user 'api-service'
+2025-07-01 11:10:39,INFO,2.92.108.27,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 11:11:18,INFO,25.197.22.48,User 'admin' logged out
+2025-07-01 11:11:32,INFO,35.82.161.88,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 11:11:42,INFO,147.90.181.51,Session refreshed for user 'charlie'
+2025-07-01 11:13:17,INFO,128.153.94.156,Successful login for user 'bob'
+2025-07-01 11:13:27,INFO,74.44.168.149,File access: /var/www/app.js
+2025-07-01 11:14:51,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 11:15:03,INFO,170.159.181.138,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 11:16:16,INFO,189.245.249.218,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 11:16:45,INFO,211.151.224.80,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 11:17:04,INFO,170.159.181.138,User 'alice' logged out
+2025-07-01 11:17:47,INFO,194.62.13.110,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 11:19:07,INFO,163.241.248.121,Successful login for user 'bob'
+2025-07-01 11:19:13,INFO,170.159.181.138,Successful login for user 'testuser'
+2025-07-01 11:19:24,INFO,22.198.105.54,File access: /var/www/index.html
+2025-07-01 11:19:28,INFO,170.159.181.138,User 'charlie' logged out
+2025-07-01 11:19:46,INFO,13.44.183.99,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 11:20:42,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 11:20:54,INFO,145.232.123.187,Successful login for user 'bob'
+2025-07-01 11:21:22,INFO,58.231.135.133,User 'alice' logged out
+2025-07-01 11:21:25,INFO,96.198.221.229,File access: /var/www/app.js
+2025-07-01 11:21:49,INFO,68.18.194.24,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 11:22:08,INFO,36.29.227.122,File access: /var/www/contact.html
+2025-07-01 11:22:28,INFO,5.254.191.250,Successful login for user 'charlie'
+2025-07-01 11:22:50,INFO,112.233.115.142,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 11:24:08,INFO,52.237.144.126,Successful login for user 'alice'
+2025-07-01 11:24:14,INFO,85.64.137.73,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 11:25:42,INFO,170.159.181.138,Successful login for user 'api-service'
+2025-07-01 11:25:43,INFO,215.205.125.66,Session refreshed for user 'alice'
+2025-07-01 11:26:30,INFO,90.185.106.100,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 11:27:12,INFO,102.205.110.251,User 'admin' logged out
+2025-07-01 11:27:43,INFO,183.151.235.136,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 11:28:19,INFO,19.108.91.218,Session refreshed for user 'charlie'
+2025-07-01 11:28:20,INFO,168.146.150.254,Session refreshed for user 'admin'
+2025-07-01 11:28:48,INFO,198.144.29.186,Session refreshed for user 'admin'
+2025-07-01 11:29:07,INFO,128.149.214.169,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 11:29:50,INFO,19.153.207.145,Successful login for user 'admin'
+2025-07-01 11:30:56,INFO,167.51.245.93,File access: /var/www/main.css
+2025-07-01 11:30:56,INFO,34.73.56.47,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 11:31:56,INFO,35.29.222.242,Session refreshed for user 'admin'
+2025-07-01 11:32:19,INFO,99.161.219.76,User 'api-service' logged out
+2025-07-01 11:32:44,INFO,219.137.85.223,Session refreshed for user 'admin'
+2025-07-01 11:33:17,INFO,58.10.219.16,Session refreshed for user 'testuser'
+2025-07-01 11:34:01,INFO,140.236.162.151,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 11:34:07,INFO,190.189.71.38,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 11:34:37,INFO,92.104.109.225,User 'alice' logged out
+2025-07-01 11:35:23,INFO,36.236.153.143,Session refreshed for user 'api-service'
+2025-07-01 11:35:44,INFO,170.159.181.138,Session refreshed for user 'alice'
+2025-07-01 11:35:45,INFO,50.107.101.183,User 'bob' logged out
+2025-07-01 11:36:21,INFO,203.0.188.0,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 11:36:43,INFO,36.12.94.35,File access: /var/www/index.html
+2025-07-01 11:37:14,INFO,220.40.69.85,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 11:37:17,INFO,151.189.190.186,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 11:37:21,INFO,161.143.133.158,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 11:37:40,INFO,74.29.96.197,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 11:38:06,INFO,58.38.115.61,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 11:38:42,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 11:39:19,INFO,115.22.221.35,Successful login for user 'api-service'
+2025-07-01 11:40:53,INFO,34.18.81.156,Session refreshed for user 'alice'
+2025-07-01 11:42:04,INFO,35.125.18.1,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 11:42:17,INFO,177.110.27.244,File access: /var/www/app.js
+2025-07-01 11:42:21,INFO,171.64.14.148,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 11:42:22,INFO,128.240.155.5,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 11:42:41,INFO,34.28.184.137,File access: /var/www/main.css
+2025-07-01 11:43:41,INFO,165.126.81.0,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 11:44:12,INFO,170.159.181.138,Successful login for user 'bob'
+2025-07-01 11:44:50,INFO,170.159.181.138,File access: /var/www/app.js
+2025-07-01 11:45:00,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 11:45:02,INFO,87.221.209.161,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 11:45:12,INFO,110.236.65.140,File access: /var/www/contact.html
+2025-07-01 11:46:47,INFO,183.254.26.175,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 11:47:25,INFO,144.239.189.96,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 11:47:32,INFO,170.159.181.138,Successful login for user 'testuser'
+2025-07-01 11:48:58,INFO,20.187.215.116,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 11:49:17,INFO,183.27.135.71,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 11:49:20,INFO,101.8.230.23,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 11:49:20,INFO,134.216.102.225,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 11:49:41,INFO,159.224.125.216,User 'testuser' logged out
+2025-07-01 11:50:00,INFO,9.235.153.196,Session refreshed for user 'api-service'
+2025-07-01 11:51:31,INFO,26.94.109.164,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 11:51:59,INFO,222.229.175.74,Session refreshed for user 'bob'
+2025-07-01 11:52:12,INFO,132.27.114.137,Session refreshed for user 'bob'
+2025-07-01 11:52:40,INFO,4.64.30.195,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 11:55:00,INFO,193.166.19.35,File access: /var/www/app.js
+2025-07-01 11:55:46,INFO,32.212.246.203,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 11:56:04,INFO,177.195.237.130,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 11:57:10,INFO,170.159.181.138,Successful login for user 'bob'
+2025-07-01 11:58:20,INFO,85.87.103.192,Session refreshed for user 'testuser'
+2025-07-01 11:59:18,INFO,123.37.184.167,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 11:59:37,INFO,170.159.181.138,Session refreshed for user 'charlie'
+2025-07-01 11:59:42,INFO,163.15.30.49,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 12:00:07,INFO,83.49.71.128,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 12:13:15,INFO,129.38.100.113,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 12:15:42,INFO,153.196.106.127,User 'charlie' logged out
+2025-07-01 12:20:55,INFO,78.197.28.189,Session refreshed for user 'api-service'
+2025-07-01 12:24:09,INFO,148.204.191.110,Successful login for user 'api-service'
+2025-07-01 12:27:26,INFO,175.4.49.18,User 'api-service' logged out
+2025-07-01 12:32:19,INFO,88.188.189.208,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 12:32:49,INFO,133.10.87.131,User 'admin' logged out
+2025-07-01 12:34:57,INFO,39.175.190.173,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 12:36:25,INFO,170.159.181.138,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 12:36:37,INFO,170.159.181.138,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 12:55:59,INFO,6.208.19.16,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 13:05:33,INFO,40.44.126.68,User 'admin' logged out
+2025-07-01 13:06:21,INFO,158.77.242.231,Session refreshed for user 'bob'
+2025-07-01 13:08:33,INFO,100.250.87.163,Successful login for user 'charlie'
+2025-07-01 13:08:50,INFO,188.125.16.16,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 13:14:02,INFO,162.122.55.74,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 13:20:27,INFO,152.203.60.143,Successful login for user 'testuser'
+2025-07-01 13:28:10,INFO,33.234.81.31,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 13:33:15,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 13:42:45,INFO,88.235.160.192,File access: /var/www/index.html
+2025-07-01 13:44:02,INFO,95.117.204.105,Successful login for user 'alice'
+2025-07-01 13:45:35,INFO,170.159.181.138,File access: /var/www/app.js
+2025-07-01 13:47:09,INFO,84.50.140.27,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 13:59:51,INFO,133.179.166.41,Session refreshed for user 'bob'
+2025-07-01 14:03:36,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 14:06:20,INFO,170.159.181.138,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 14:09:15,INFO,20.140.10.4,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 14:14:38,INFO,136.242.128.92,Successful login for user 'api-service'
+2025-07-01 14:23:58,INFO,40.27.105.63,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 14:25:42,INFO,152.36.174.180,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 14:31:34,INFO,19.145.245.136,User 'testuser' logged out
+2025-07-01 14:37:50,INFO,170.159.181.138,Session refreshed for user 'admin'
+2025-07-01 14:39:43,INFO,179.92.163.84,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 14:42:23,INFO,200.138.60.215,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 14:42:42,INFO,170.159.181.138,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 14:44:35,INFO,56.32.196.229,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 14:46:20,INFO,33.177.158.158,File access: /var/www/main.css
+2025-07-01 14:51:17,INFO,90.108.224.236,Successful login for user 'testuser'
+2025-07-01 14:54:23,INFO,17.19.185.35,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 15:09:47,INFO,82.187.100.239,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 15:11:21,INFO,158.60.210.254,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 15:11:50,INFO,75.229.24.72,Successful login for user 'testuser'
+2025-07-01 15:18:58,INFO,94.105.218.234,Successful login for user 'bob'
+2025-07-01 15:19:49,INFO,42.56.64.139,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 15:27:14,INFO,40.225.10.129,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 15:30:15,INFO,75.114.198.127,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 15:34:35,INFO,106.158.116.172,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 15:48:35,INFO,160.41.120.57,Session refreshed for user 'bob'
+2025-07-01 15:53:38,INFO,6.175.96.216,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 15:57:47,INFO,14.90.201.121,User 'testuser' logged out
+2025-07-01 15:59:25,INFO,184.196.218.202,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 16:06:55,INFO,170.159.181.138,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 16:18:48,INFO,215.42.58.222,Session refreshed for user 'bob'
+2025-07-01 16:24:59,INFO,45.47.16.93,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 16:27:03,INFO,37.210.204.23,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 16:29:50,INFO,164.159.155.22,User 'api-service' logged out
+2025-07-01 16:30:32,INFO,177.219.134.66,Successful login for user 'charlie'
+2025-07-01 16:33:48,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 16:35:49,INFO,99.32.120.161,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 16:36:44,INFO,201.108.216.131,File access: /var/www/index.html
+2025-07-01 16:41:47,INFO,174.213.22.145,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 16:44:23,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 16:46:12,INFO,139.10.223.150,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 16:47:39,INFO,20.191.48.215,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 16:50:37,INFO,27.125.185.189,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 16:52:30,INFO,64.156.90.160,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 16:52:34,INFO,82.155.209.31,Successful login for user 'bob'
+2025-07-01 16:58:14,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 17:09:39,INFO,170.159.181.138,Session refreshed for user 'testuser'
+2025-07-01 17:12:28,INFO,24.181.140.101,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 17:16:13,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 17:21:45,INFO,144.166.125.3,Session refreshed for user 'api-service'
+2025-07-01 17:32:53,INFO,217.104.231.55,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 17:34:24,INFO,131.57.248.98,Session refreshed for user 'testuser'
+2025-07-01 17:52:57,INFO,137.190.43.225,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 17:53:30,INFO,170.159.181.138,Session refreshed for user 'bob'
+2025-07-01 18:00:18,INFO,176.86.190.236,User 'api-service' logged out
+2025-07-01 18:00:23,INFO,40.50.74.39,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 18:00:28,INFO,170.159.181.138,Session refreshed for user 'admin'
+2025-07-01 18:00:30,INFO,168.246.5.215,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 18:01:25,INFO,143.125.244.168,User 'testuser' logged out
+2025-07-01 18:01:26,INFO,170.159.181.138,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 18:03:10,INFO,195.0.119.110,User 'testuser' logged out
+2025-07-01 18:03:43,INFO,170.159.181.138,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 18:04:30,INFO,170.159.181.138,Successful login for user 'api-service'
+2025-07-01 18:04:40,INFO,8.70.178.78,Successful login for user 'api-service'
+2025-07-01 18:05:04,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 18:05:23,INFO,170.159.181.138,User 'admin' logged out
+2025-07-01 18:05:29,INFO,3.255.245.24,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 18:05:48,INFO,214.229.54.36,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 18:05:50,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 18:06:13,INFO,120.104.246.147,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 18:06:53,INFO,93.157.32.144,File access: /var/www/contact.html
+2025-07-01 18:08:28,INFO,213.4.96.82,User 'charlie' logged out
+2025-07-01 18:08:38,INFO,143.209.52.209,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 18:08:49,INFO,170.159.181.138,User 'api-service' logged out
+2025-07-01 18:08:55,INFO,136.222.159.135,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 18:09:01,INFO,153.61.96.31,User 'alice' logged out
+2025-07-01 18:09:33,INFO,197.42.112.7,Successful login for user 'charlie'
+2025-07-01 18:09:45,INFO,56.59.190.210,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 18:10:19,INFO,101.190.155.114,User 'bob' logged out
+2025-07-01 18:10:27,INFO,7.242.250.242,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 18:11:36,INFO,138.108.37.86,Successful login for user 'alice'
+2025-07-01 18:11:49,INFO,70.6.40.179,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 18:12:47,INFO,208.23.232.121,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 18:13:10,INFO,141.207.39.38,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 18:13:19,INFO,47.193.39.54,Session refreshed for user 'alice'
+2025-07-01 18:13:36,INFO,70.0.209.185,User 'admin' logged out
+2025-07-01 18:14:31,INFO,115.233.54.151,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 18:14:56,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 18:15:30,INFO,52.133.239.13,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 18:16:00,INFO,99.192.16.207,User 'alice' logged out
+2025-07-01 18:16:11,INFO,40.67.21.154,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 18:16:15,INFO,170.114.58.162,Successful login for user 'api-service'
+2025-07-01 18:18:10,INFO,123.243.130.138,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 18:18:22,INFO,2.131.167.117,File access: /var/www/main.css
+2025-07-01 18:18:28,INFO,44.209.129.149,Successful login for user 'alice'
+2025-07-01 18:19:17,INFO,150.48.0.74,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 18:20:22,INFO,36.176.93.16,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 18:21:13,INFO,77.170.183.204,File access: /var/www/app.js
+2025-07-01 18:21:24,INFO,27.82.189.191,Session refreshed for user 'alice'
+2025-07-01 18:22:26,INFO,170.159.181.138,Successful login for user 'testuser'
+2025-07-01 18:22:54,INFO,39.240.67.116,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 18:22:59,INFO,63.171.26.217,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 18:23:23,INFO,138.110.157.125,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 18:23:45,INFO,150.172.190.124,User 'alice' logged out
+2025-07-01 18:24:42,INFO,199.94.178.193,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 18:25:09,INFO,170.159.181.138,Successful login for user 'testuser'
+2025-07-01 18:25:16,INFO,53.131.239.232,File access: /var/www/app.js
+2025-07-01 18:26:08,INFO,45.72.17.125,File access: /var/www/contact.html
+2025-07-01 18:27:03,INFO,112.55.235.141,User 'api-service' logged out
+2025-07-01 18:27:04,INFO,61.222.214.188,GET /about.html HTTP/1.1 304 5321 - curl/7.88.1
+2025-07-01 18:27:05,INFO,2.143.159.151,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 18:27:20,INFO,170.159.181.138,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 18:28:31,INFO,49.207.79.45,File access: /var/www/app.js
+2025-07-01 18:28:58,INFO,115.57.136.251,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 18:29:22,INFO,97.207.14.41,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 18:29:47,INFO,156.58.231.51,User 'charlie' logged out
+2025-07-01 18:30:20,INFO,121.106.46.71,Successful login for user 'testuser'
+2025-07-01 18:30:30,INFO,79.122.240.247,GET /dashboard HTTP/1.1 302 5321 - Chrome/120.0
+2025-07-01 18:31:25,INFO,31.183.216.178,File access: /var/www/index.html
+2025-07-01 18:31:52,INFO,170.159.181.138,Session refreshed for user 'charlie'
+2025-07-01 18:31:54,INFO,170.159.181.138,Successful login for user 'bob'
+2025-07-01 18:32:31,INFO,49.107.165.136,File access: /var/www/contact.html
+2025-07-01 18:32:32,INFO,170.159.181.138,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 18:32:44,INFO,102.62.221.41,Session refreshed for user 'alice'
+2025-07-01 18:33:00,INFO,194.223.178.151,File access: /var/www/contact.html
+2025-07-01 18:33:13,INFO,42.58.126.155,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 18:33:20,INFO,79.96.49.180,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 18:33:28,INFO,188.8.15.78,Successful login for user 'api-service'
+2025-07-01 18:33:53,INFO,170.159.181.138,Session refreshed for user 'api-service'
+2025-07-01 18:34:49,INFO,58.119.128.154,File access: /var/www/index.html
+2025-07-01 18:35:21,INFO,32.173.173.239,File access: /var/www/index.html
+2025-07-01 18:35:28,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 18:35:36,INFO,5.188.94.144,GET /about.html HTTP/1.1 304 0 - curl/7.88.1
+2025-07-01 18:36:55,INFO,51.101.177.19,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 18:37:00,INFO,90.124.125.89,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 18:37:09,INFO,144.89.115.120,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 18:39:50,INFO,91.132.220.24,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 18:39:56,INFO,174.26.32.122,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 18:40:11,INFO,66.235.107.153,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 18:40:30,INFO,215.70.207.184,User 'charlie' logged out
+2025-07-01 18:41:10,INFO,51.75.221.206,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 18:42:08,INFO,170.159.181.138,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 18:42:09,INFO,150.124.87.238,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 18:42:21,INFO,97.247.242.182,POST /api/data HTTP/1.1 200 4096 - python-requests/2.31
+2025-07-01 18:42:28,INFO,68.26.73.243,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 18:43:28,INFO,170.159.181.138,File access: /var/www/app.js
+2025-07-01 18:43:37,INFO,59.89.91.248,File access: /var/www/index.html
+2025-07-01 18:43:56,INFO,23.51.173.208,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 18:44:20,INFO,47.24.165.224,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 18:44:30,INFO,117.5.106.72,POST /api/data HTTP/1.1 200 2048 - python-requests/2.31
+2025-07-01 18:44:40,INFO,8.60.65.183,Successful login for user 'api-service'
+2025-07-01 18:44:41,INFO,198.180.230.38,Session refreshed for user 'admin'
+2025-07-01 18:44:50,INFO,11.237.157.254,Successful login for user 'alice'
+2025-07-01 18:45:14,INFO,170.159.181.138,Successful login for user 'admin'
+2025-07-01 18:47:00,INFO,50.85.47.196,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 18:47:08,INFO,215.1.147.36,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 18:47:20,INFO,102.203.1.144,File access: /var/www/contact.html
+2025-07-01 18:47:21,INFO,145.150.169.81,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 18:47:23,INFO,161.48.199.124,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 18:47:34,INFO,5.49.98.69,File access: /var/www/index.html
+2025-07-01 18:48:18,INFO,76.195.206.80,File access: /var/www/contact.html
+2025-07-01 18:49:58,INFO,170.159.181.138,Successful login for user 'alice'
+2025-07-01 18:50:06,INFO,176.149.30.36,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 18:50:42,INFO,195.61.178.167,File access: /var/www/contact.html
+2025-07-01 18:50:47,INFO,15.141.69.220,Successful login for user 'bob'
+2025-07-01 18:51:26,INFO,14.212.3.21,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 18:51:45,INFO,119.178.33.94,Session refreshed for user 'admin'
+2025-07-01 18:52:50,INFO,221.223.97.147,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 18:53:11,INFO,38.53.242.200,Successful login for user 'testuser'
+2025-07-01 18:53:27,INFO,170.159.181.138,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 18:54:12,INFO,106.201.19.48,Session refreshed for user 'charlie'
+2025-07-01 18:54:22,INFO,133.225.93.199,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 18:54:43,INFO,156.105.99.179,Session refreshed for user 'bob'
+2025-07-01 18:54:50,INFO,18.86.239.228,User 'admin' logged out
+2025-07-01 18:56:05,INFO,48.104.110.68,Session refreshed for user 'api-service'
+2025-07-01 18:57:21,INFO,25.44.169.73,User 'alice' logged out
+2025-07-01 18:57:28,INFO,193.165.16.127,User 'charlie' logged out
+2025-07-01 18:58:06,INFO,170.159.181.138,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 18:58:19,INFO,157.212.240.132,Session refreshed for user 'charlie'
+2025-07-01 18:58:26,INFO,202.219.94.71,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 18:59:30,INFO,110.170.113.255,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 19:00:30,INFO,170.159.181.138,GET /home HTTP/1.1 200 5321 - Mozilla/5.0
+2025-07-01 19:00:52,INFO,134.117.104.254,User 'bob' logged out
+2025-07-01 19:02:02,INFO,135.158.172.129,User 'charlie' logged out
+2025-07-01 19:02:31,INFO,16.140.242.233,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 19:02:33,INFO,170.159.181.138,User 'testuser' logged out
+2025-07-01 19:02:44,INFO,170.159.181.138,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 19:03:34,INFO,143.92.107.218,Session refreshed for user 'api-service'
+2025-07-01 19:03:34,INFO,135.91.248.177,Session refreshed for user 'testuser'
+2025-07-01 19:03:58,INFO,162.90.175.152,File access: /var/www/contact.html
+2025-07-01 19:04:16,INFO,170.159.181.138,File access: /var/www/app.js
+2025-07-01 19:05:13,INFO,211.7.202.178,GET /dashboard HTTP/1.1 302 0 - Chrome/120.0
+2025-07-01 19:05:59,INFO,59.195.166.169,User 'api-service' logged out
+2025-07-01 19:06:15,INFO,125.18.255.72,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 19:06:34,INFO,186.201.123.11,File access: /var/www/contact.html
+2025-07-01 19:07:22,INFO,171.162.220.36,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 19:08:09,INFO,170.159.181.138,Successful login for user 'testuser'
+2025-07-01 19:08:23,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 2048 - curl/7.88.1
+2025-07-01 19:08:34,INFO,170.159.181.138,File access: /var/www/index.html
+2025-07-01 19:09:37,INFO,16.192.63.189,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 19:09:41,INFO,84.108.207.9,GET /dashboard HTTP/1.1 302 4096 - Chrome/120.0
+2025-07-01 19:10:56,INFO,44.162.238.71,Successful login for user 'api-service'
+2025-07-01 19:11:41,INFO,206.37.193.51,POST /api/data HTTP/1.1 200 0 - python-requests/2.31
+2025-07-01 19:11:56,INFO,178.189.241.206,File access: /var/www/contact.html
+2025-07-01 19:12:38,INFO,47.216.18.99,User 'charlie' logged out
+2025-07-01 19:12:51,INFO,187.17.241.159,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 19:14:59,INFO,51.143.191.60,Session refreshed for user 'api-service'
+2025-07-01 19:16:35,INFO,139.174.43.62,POST /api/data HTTP/1.1 200 5321 - python-requests/2.31
+2025-07-01 19:17:10,INFO,139.223.240.72,GET /home HTTP/1.1 200 0 - Mozilla/5.0
+2025-07-01 19:18:21,INFO,142.207.97.6,GET /home HTTP/1.1 200 4096 - Mozilla/5.0
+2025-07-01 19:18:28,INFO,220.99.240.218,File access: /var/www/app.js
+2025-07-01 19:18:33,INFO,145.165.163.241,GET /dashboard HTTP/1.1 302 1245 - Chrome/120.0
+2025-07-01 19:18:59,INFO,204.19.125.242,User 'admin' logged out
+2025-07-01 19:19:23,INFO,41.52.68.202,Successful login for user 'admin'
+2025-07-01 19:20:56,INFO,76.234.245.16,POST /api/data HTTP/1.1 200 1245 - python-requests/2.31
+2025-07-01 19:21:13,INFO,120.12.33.81,GET /dashboard HTTP/1.1 302 2048 - Chrome/120.0
+2025-07-01 19:22:59,INFO,170.159.181.138,Successful login for user 'alice'
+2025-07-01 19:23:17,INFO,170.159.181.138,File access: /var/www/index.html
+2025-07-01 19:23:55,INFO,46.46.71.237,User 'bob' logged out
+2025-07-01 19:24:29,INFO,92.116.120.129,File access: /var/www/main.css
+2025-07-01 19:24:56,INFO,188.51.18.156,GET /home HTTP/1.1 200 1245 - Mozilla/5.0
+2025-07-01 19:25:01,INFO,30.92.7.129,File access: /var/www/main.css
+2025-07-01 19:25:35,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 4096 - curl/7.88.1
+2025-07-01 19:25:36,INFO,121.21.160.173,User 'admin' logged out
+2025-07-01 19:26:45,INFO,170.159.181.138,GET /about.html HTTP/1.1 304 1245 - curl/7.88.1
+2025-07-01 19:26:48,INFO,170.159.181.138,File access: /var/www/contact.html
+2025-07-01 19:26:49,INFO,49.180.29.57,File access: /var/www/index.html
+2025-07-01 19:26:51,INFO,170.159.181.138,Session refreshed for user 'bob'
+2025-07-01 19:27:56,INFO,40.216.25.215,Session refreshed for user 'api-service'
+2025-07-01 19:28:44,INFO,150.30.27.239,GET /home HTTP/1.1 200 2048 - Mozilla/5.0
+2025-07-01 19:29:53,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:30:15,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:32:14,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:32:28,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:33:14,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:33:24,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:33:51,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:34:05,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:34:45,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:35:12,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:36:43,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:37:04,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:37:34,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:37:40,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:38:22,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:38:24,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:38:34,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:38:43,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:38:47,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:39:13,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:40:04,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:40:28,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:40:30,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:41:04,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:41:13,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:41:24,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:41:32,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:41:51,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:41:57,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:42:18,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:43:49,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:44:00,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:44:01,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:45:47,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:46:51,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:47:05,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:47:41,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:48:12,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:48:33,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:49:24,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:51:09,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:51:35,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:52:23,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:53:38,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:54:20,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:54:37,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:55:01,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:55:06,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:55:41,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:56:13,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:56:30,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:56:46,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:58:04,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:58:12,INFO,103.77.19.142,Failed password for user root
+2025-07-01 19:58:13,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 19:59:35,INFO,103.77.19.142,Invalid user test
+2025-07-01 19:59:58,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:00:46,INFO,103.77.19.142,Failed password for user root
+2025-07-01 20:01:24,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:04:19,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:05:22,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:05:27,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:05:43,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:06:28,INFO,103.77.19.142,Failed password for user root
+2025-07-01 20:06:29,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:07:19,INFO,103.77.19.142,Failed password for user root
+2025-07-01 20:07:20,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:07:43,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:08:38,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:08:46,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:09:48,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:12:04,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:12:51,INFO,103.77.19.142,Failed password for user root
+2025-07-01 20:13:32,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:14:18,INFO,103.77.19.142,Failed password for user root
+2025-07-01 20:14:34,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:14:44,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:15:02,INFO,103.77.19.142,Failed password for user root
+2025-07-01 20:15:03,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:15:07,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:15:31,INFO,103.77.19.142,Failed password for user root
+2025-07-01 20:16:05,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:17:29,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:18:42,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:18:58,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:19:23,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:19:39,INFO,103.77.19.142,Failed password for user root
+2025-07-01 20:20:43,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:21:25,INFO,103.77.19.142,Failed password for user admin
+2025-07-01 20:22:32,INFO,103.77.19.142,Invalid user test
+2025-07-01 20:22:59,INFO,45.137.21.109,Failed password for user admin
+2025-07-01 20:23:16,INFO,45.137.21.109,Failed password for user root
+2025-07-01 20:23:34,INFO,45.137.21.109,Failed password for user admin
+2025-07-01 20:23:52,INFO,45.137.21.109,Failed password for user admin
+2025-07-01 20:24:24,INFO,45.137.21.109,Failed password for user root
+2025-07-01 20:25:10,INFO,45.137.21.109,Failed password for user root
+2025-07-01 20:25:39,INFO,45.137.21.109,Failed password for user root
+2025-07-01 20:26:12,INFO,45.137.21.109,Failed password for user admin
+2025-07-01 20:26:45,INFO,45.137.21.109,Failed password for user admin
+2025-07-01 20:27:10,WARN,198.167.140.21,Connection probe detected
+2025-07-01 20:28:46,WARN,198.167.140.21,Port scan behavior observed
+2025-07-01 20:28:51,WARN,198.167.140.21,Connection probe detected
+2025-07-01 20:29:14,WARN,198.167.140.21,Connection probe detected
+2025-07-01 20:29:54,WARN,198.167.140.21,Connection probe detected
+2025-07-01 20:29:57,ERROR,177.233.141.6,[PHP-FPM] child 123 exited on signal 11 (SIGSEGV)
+2025-07-01 20:31:53,ERROR,49.182.46.230,"ConfigError: Invalid path ""/etc/config,main"" in module loader"
+2025-07-01 20:32:04,ERROR,117.46.210.49,"Unexpected token "","" in JSON at position 12"
+2025-07-01 20:32:22,ERROR,119.132.171.107,Database connection timed out for pool_a
+2025-07-01 20:32:48,ERROR,13.221.138.186,"ConfigError: Invalid path ""/etc/config,main"" in module loader"
+2025-07-01 20:32:58,ERROR,30.14.87.9,NullPointerException at com.app.Service:142
+2025-07-01 20:33:11,ERROR,202.204.248.32,[PHP-FPM] child 123 exited on signal 11 (SIGSEGV)
+2025-07-01 20:33:26,ERROR,198.88.179.181,Kafka producer flush failed after 30s (retry=3)
+2025-07-01 20:33:58,ERROR,92.183.74.112,NullPointerException at com.app.Service:142
+2025-07-01 20:34:25,ERROR,20.253.49.135,Database connection timed out for pool_a
+2025-07-01 20:34:35,ERROR,137.123.21.136,"ConfigError: Invalid path ""/etc/config,main"" in module loader"
+2025-07-01 20:34:40,ERROR,124.43.138.31,NullPointerException at com.app.Service:142
+2025-07-01 20:35:18,ERROR,149.154.211.180,Database connection timed out for pool_a
+2025-07-01 20:36:21,ERROR,2.76.249.68,NullPointerException at com.app.Service:142
+2025-07-01 20:36:25,ERROR,92.103.78.248,NullPointerException at com.app.Service:142
+2025-07-01 20:36:30,ERROR,105.222.72.74,Kafka producer flush failed after 30s (retry=3)
+2025-07-01 20:36:40,INFO,90.142.52.101,GET /index.php?q=' or '1'='1 HTTP/1.1 500 0 - sqlmap
+2025-07-01 20:37:31,INFO,16.29.252.76,Nikto scan detected in User-Agent
+2025-07-01 20:40:29,INFO,222.140.9.152,GET /..%2f..%2f..%2fboot.ini HTTP/1.1 403 0 - Mozilla/5.0
+2025-07-01 20:40:38,INFO,183.165.249.126,GET /etc/passwd HTTP/1.1 200 42 - curl/8.4.0
+2025-07-01 20:41:28,INFO,120.221.8.175,Nikto scan detected in User-Agent
+2025-07-01 20:41:35,INFO,59.145.152.93,Invalid user guest
+2025-07-01 20:41:39,INFO,210.83.17.23,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:42:27,INFO,16.90.161.131,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:42:58,INFO,ab55:f29b:f110:5304:406b:5ff9:6e4c:d34a,Failed password for user admin
+2025-07-01 20:43:00,INFO,117.15.47.215,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:43:57,INFO,160.4.209.197,Invalid user guest
+2025-07-01 20:44:29,INFO,7764:8b19:624a:eb8f:e661:7c08:d93b:94bc,Invalid user guest
+2025-07-01 20:44:30,INFO,d951:238b:308c:b7c8:59fa:77e9:543b:cbfe,Failed password for user admin
+2025-07-01 20:44:35,INFO,1210:296e:ed2c:425a:29c6:be8b:81a3:6d45,Invalid user guest
+2025-07-01 20:45:05,INFO,f4b1:bcb:e400:4643:bc53:7965:8ab2:e9f1,Invalid user guest
+2025-07-01 20:45:37,INFO,55.149.110.0,Failed password for user admin
+2025-07-01 20:45:54,INFO,186.179.0.180,Invalid user guest
+2025-07-01 20:45:55,INFO,313d:48b4:f31a:451b:7d6c:c4fc:3675:4755,Invalid user guest
+2025-07-01 20:45:57,INFO,184.94.46.164,Failed password for user admin
+2025-07-01 20:46:24,INFO,1ba6:e079:b137:f81b:3091:ac30:5bca:7ae8,Failed password for user admin
+2025-07-01 20:47:06,INFO,6059:fe60:c66c:d5ae:1f61:a4b3:1509:df7f,Failed password for user admin
+2025-07-01 20:47:52,INFO,8699:3986:771f:e8f9:8ffc:14de:27a6:eab7,Invalid user guest
+2025-07-01 20:48:49,INFO,31.114.43.155,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:49:26,INFO,f89a:61b9:e64e:69eb:43ba:c4f5:238:df02,Failed password for user admin
+2025-07-01 20:49:42,INFO,4177:fbc7:6889:5b77:e917:e7d3:26a5:49bc,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:50:36,INFO,d37f:af99:5b91:9943:eae0:d9a9:8b7b:395b,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:50:46,INFO,128.125.77.59,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:51:13,INFO,ae46:b15a:fd5e:f827:c266:1e4f:5f10:673d,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:51:49,INFO,a54f:903c:6f57:19ce:8202:18f3:ef36:4d67,Failed password for user admin
+2025-07-01 20:52:29,INFO,157.164.245.185,Invalid user guest
+2025-07-01 20:53:59,INFO,4161:d050:b492:5930:455f:9ac8:1c63:73d3,Invalid user guest
+2025-07-01 20:54:13,INFO,e0c4:c524:e2dc:f4a7:bd84:b2e2:c414:aa74,Failed password for user admin
+2025-07-01 20:54:55,INFO,196.162.222.27,Invalid user guest
+2025-07-01 20:55:37,INFO,167.81.179.27,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:56:04,INFO,c70c:f47:b447:84b:34bb:35ca:6b2:b124,Invalid user guest
+2025-07-01 20:56:06,INFO,5.253.85.240,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:57:35,INFO,516:df51:a8d6:2780:d6b4:18f7:dc7d:f8ac,Invalid user guest
+2025-07-01 20:58:22,INFO,126.29.4.224,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:58:30,INFO,81.138.132.95,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 20:58:38,INFO,101.86.14.15,Invalid user guest
+2025-07-01 20:58:48,INFO,f9a:354d:d240:b5f5:ff1a:aef7:f7f0:7254,Failed password for user admin
+2025-07-01 20:58:54,INFO,e6d1:a779:1f88:23e9:ae05:8c51:8b37:690d,Invalid user guest
+2025-07-01 21:06:51,INFO,3a86:3923:a28a:c242:3810:3d51:b653:3ae7,Invalid user guest
+2025-07-01 21:10:08,INFO,fda:6638:571d:fbd9:669c:832:edbf:aa47,Invalid user guest
+2025-07-01 21:11:53,INFO,84.25.46.47,Failed password for user admin
+2025-07-01 21:20:52,INFO,837d:c657:6170:9c8d:133d:8367:ca95:8976,Invalid user guest
+2025-07-01 21:25:40,INFO,63.66.25.49,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 21:31:44,INFO,166.151.235.228,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 21:33:39,INFO,25ac:a3ff:c321:4cda:cfd2:a76c:7d3c:3589,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 21:37:03,INFO,81.183.30.190,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 21:57:26,INFO,82.179.215.196,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 22:14:09,INFO,72.163.185.156,Invalid user guest
+2025-07-01 22:16:59,INFO,50.220.218.208,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 22:19:37,INFO,a220:462e:eb5c:7a9a:191d:471a:7a06:66ee,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 22:22:42,INFO,118.29.65.196,Invalid user guest
+2025-07-01 22:23:23,INFO,62.218.28.225,Invalid user guest
+2025-07-01 22:23:42,INFO,195.69.116.116,Failed password for user admin
+2025-07-01 22:26:31,INFO,6.39.242.179,Invalid user guest
+2025-07-01 22:31:27,INFO,11.250.140.158,Failed password for user admin
+2025-07-01 22:32:31,INFO,102.243.162.11,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 22:33:30,INFO,4.77.161.232,Failed password for user admin
+2025-07-01 22:33:35,INFO,105.22.80.96,Failed password for user admin
+2025-07-01 22:36:02,INFO,22.32.154.56,Failed password for user admin
+2025-07-01 22:38:42,INFO,5f9b:ad7a:7057:64d5:770a:bb62:2b5d:8f2,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 22:49:44,INFO,170.105.60.221,Failed password for user admin
+2025-07-01 22:56:27,INFO,5345:a992:a54e:c973:8f33:75da:937:cdbc,Failed password for user admin
+2025-07-01 22:58:16,INFO,d4b8:3a96:a:63fc:aacf:7739:1c1e:1297,Failed password for user admin
+2025-07-01 22:58:34,INFO,158.173.87.59,Failed password for user admin
+2025-07-01 23:09:29,INFO,22f4:1092:39dd:276f:9899:8c:68f2:954f,Failed password for user admin
+2025-07-01 23:18:50,INFO,185.128.62.188,Failed password for user admin
+2025-07-01 23:18:55,INFO,98cd:895a:9fc5:ee89:4e70:ff55:5a76:b4c4,Invalid user guest
+2025-07-01 23:26:17,INFO,203.98.163.156,Failed password for user admin
+2025-07-01 23:28:06,INFO,155.212.59.190,Failed password for user admin
+2025-07-01 23:31:29,INFO,c43:d762:8fd:f316:ab76:686a:22db:ae79,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 23:34:04,INFO,198.223.115.23,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 23:39:31,INFO,974d:e617:57aa:81e8:7bb8:8afb:d8b:fdd3,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 23:41:11,INFO,72.217.71.243,Invalid user guest
+2025-07-01 23:41:36,INFO,248e:6d9a:cf8f:cfa2:4cc8:fcaa:8240:145d,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
+2025-07-01 23:58:04,INFO,200.236.143.111,Invalid user guest
+2025-07-01 23:58:28,INFO,86.126.151.127,GET /wp-login.php HTTP/1.1 401 0 - Mozilla/5.0
