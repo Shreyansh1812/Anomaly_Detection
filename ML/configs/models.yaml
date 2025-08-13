@@ -1,0 +1,86 @@
+# Model-specific configurations
+
+# Template extraction model configurations
+template_mining:
+  algorithm: drain3
+  parameters:
+    sim_th: 0.4  # Similarity threshold
+    depth: 4     # Depth of tree
+    max_clusters: 1000  # Maximum number of clusters
+  training:
+    use_pretrained: false
+    train_data_path: ./Data/raw_logs/
+    save_model_path: ./models/template_models/drain3_model.pkl
+
+# Anomaly detection model configurations
+anomaly_detection:
+  algorithms:
+    isolation_forest:
+      enabled: true
+      parameters:
+        contamination: 0.05
+        n_estimators: 100
+        random_state: 42
+      training:
+        validation_split: 0.2
+        save_model_path: ./models/anomaly_models/isolation_forest.pkl
+        
+    local_outlier_factor:
+      enabled: true
+      parameters:
+        n_neighbors: 20
+        contamination: 0.05
+        algorithm: 'auto'
+      training:
+        validation_split: 0.2
+        save_model_path: ./models/anomaly_models/lof.pkl
+        
+    dbscan:
+      enabled: true
+      parameters:
+        eps: 0.5
+        min_samples: 5
+        algorithm: 'auto'
+      training:
+        validation_split: 0.2
+        save_model_path: ./models/anomaly_models/dbscan.pkl
+        
+    autoencoder:
+      enabled: false
+      parameters:
+        hidden_layers: [64, 32, 16, 32, 64]
+        activation: 'relu'
+        epochs: 50
+        batch_size: 32
+        learning_rate: 0.001
+      training:
+        validation_split: 0.2
+        save_model_path: ./models/anomaly_models/autoencoder.h5
+
+# Feature extraction configuration for model training
+feature_extraction:
+  time_window: 60  # in seconds
+  features:
+    - event_count
+    - template_distribution
+    - event_sequence
+    - severity_count
+  vectorization:
+    method: tfidf  # Options: tfidf, count, word2vec
+    parameters:
+      max_features: 1000
+      ngram_range: [1, 2]
+  dimension_reduction:
+    method: pca  # Options: pca, tsne, none
+    n_components: 50
+
+# Model evaluation settings
+evaluation:
+  metrics:
+    - precision
+    - recall
+    - f1_score
+    - auc
+  cross_validation:
+    n_splits: 5
+    random_state: 42

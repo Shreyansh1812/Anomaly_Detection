@@ -1,15 +1,8 @@
-# LogGuardian
-
-This repo is organized into two tracks:
-
-- `Regex/` — rule-based pipeline (no ML) with an interactive CLI, tests, and CI.
-- `ML/` — machine learning experiments, notebooks, and models (kept separate).
-
-For usage of the regex pipeline, see `Regex/README.md`.
+# LogGuardian (Regex-only)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Shreyansh1812/Anomaly_Detection/blob/feature/regex-analysis-only/Notebooks/Colab_Run_Report.ipynb)
 
-Rule-based security analysis for log files.
+Rule-based security analysis for log files. This branch focuses solely on pattern-based detection (no ML).
 
 ## Features
 - Detects SQL injection, XSS, command injection, path traversal, sensitive endpoint access, brute-force attempts, high-frequency IPs, suspicious parameters, and malicious user agents.

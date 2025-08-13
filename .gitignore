@@ -1,4 +1,49 @@
-# Python cache files
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# Data and artifacts (root legacy)
+Reports/
+models/
+Data/generated/
+Data/test_logs/
+Training Dataset/
+
+# New umbrella structure ignores
+# Regex generated content
+Regex/Reports/
+Regex/Reports_root/
+Regex/Data/generated/
+Regex/Data/test_logs/
+
+# ML model artifacts and checkpoints
+ML/models/
+ML/**/models/
+ML/**/Notebooks/.ipynb_checkpoints/
+
+# Binary model files anywhere
+**/*.joblib
+**/*.pkl
+
+# Model artifacts
+*.joblib
+*.pkl
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+Thumbs.db
+.DS_Store# Python cache files
 __pycache__/
 *.py[cod]
 *$py.class

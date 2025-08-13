@@ -1,15 +1,39 @@
-# LogGuardian
+# Regex Pipeline
 
-This repo is organized into two tracks:
+End-to-end regex-only anomaly detection pipeline with actionable intel reporting.
 
-- `Regex/` — rule-based pipeline (no ML) with an interactive CLI, tests, and CI.
-- `ML/` — machine learning experiments, notebooks, and models (kept separate).
+## Quick start
 
-For usage of the regex pipeline, see `Regex/README.md`.
+Run the interactive report generator:
+
+```powershell
+python .\Scripts\generate_report.py
+```
+
+Or run directly with flags:
+
+```powershell
+python .\Scripts\analyze_log_pipeline.py --input "Data\raw_logs\HDFS_2k.log_structured.csv" --output "Reports\hdfs_report_intel.md" --template intel
+```
+
+Reports are written under `Regex/Reports/` by default.
+
+## Tests
+
+```powershell
+pytest -q
+```
+
+## Lint
+
+```powershell
+ruff check .
+```
+# LogGuardian (Regex-only)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Shreyansh1812/Anomaly_Detection/blob/feature/regex-analysis-only/Notebooks/Colab_Run_Report.ipynb)
 
-Rule-based security analysis for log files.
+Rule-based security analysis for log files. This branch focuses solely on pattern-based detection (no ML).
 
 ## Features
 - Detects SQL injection, XSS, command injection, path traversal, sensitive endpoint access, brute-force attempts, high-frequency IPs, suspicious parameters, and malicious user agents.

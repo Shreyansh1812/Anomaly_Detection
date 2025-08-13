@@ -1,0 +1,16 @@
+line-length = 120
+select = ["E", "F", "I", "UP", "B", "PL"]
+ignore = [
+  # Allow non-capturing group hints and some long lines in tests
+  "E501",
+]
+
+[lint.isort]
+combine-as-imports = true
+force-single-line = false
+
+[format]
+quote-style = "preserve"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
