@@ -1,0 +1,10 @@
+2025-09-16 10:15:23,123 INFO User 101 logged in from 192.168.1.10
+2025-09-16 10:15:25,456 INFO User 102 logged in from 192.168.1.11
+2025-09-16 10:15:30,789 ERROR Failed login attempt for User 103 from 192.168.1.12
+2025-09-16 10:16:01,321 INFO User 101 uploaded file report.pdf
+2025-09-16 10:16:15,654 INFO User 102 uploaded file data.csv
+2025-09-16 10:16:20,987 WARN Disk usage at 85% on server1
+2025-09-16 10:16:25,555 WARN Disk usage at 90% on server1
+2025-09-16 10:17:00,999 ERROR Database connection failed on db-server
+2025-09-16 10:17:05,432 INFO User 101 logged out
+2025-09-16 10:17:10,876 INFO User 102 logged out

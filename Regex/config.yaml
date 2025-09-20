@@ -92,3 +92,17 @@ custom_error_patterns:
     - '(?i)configerror'
     - '(?i)unexpected\s+token'
     - '(?i)kafka\s+producer\s+flush\s+failed'
+
+  # High-recall web attack patterns (added)
+  sqli:
+    - "(?i)(\\bUNION\\b.*\\bSELECT\\b)|(\\bOR\\b\\s*['\"]?\\d+['\"]?\\s*=\\s*['\"]?\\d+['\"]?)|(\\bDROP\\s+TABLE\\b)|(;--|--|#)|(['\"]\\s*or\\s*['\"]1['\"]=['\"]1)"
+  traversal:
+    - "(\.\./)+etc/passwd|(\.\./)+windows|%2e%2e%2f"
+  bad_methods:
+    - "^(CONNECT|DELETE|OPTIONS)\\s+"
+  admin_endpoints:
+    - "/admin(/|\\?|$)|/wp-admin(/|\\?|$)|/delete_all"
+  malicious_ua:
+    - "(?i)(sqlmap|nmap|nikto|acunetix|curl|wget)|^[\"'\\s]*$"
+  error_codes:
+    - "\"\\s(4\\d{2}|5\\d{2})\\s"
