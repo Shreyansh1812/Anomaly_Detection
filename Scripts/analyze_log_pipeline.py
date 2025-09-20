@@ -203,25 +203,6 @@ def _pick_ip_column(df: pd.DataFrame) -> Optional[str]:
     return None
 
 
-def _pick_ua_column(df: pd.DataFrame) -> Optional[str]:
-    try:
-        cols = [str(c) for c in df.columns]
-        lower_map = {c.lower(): c for c in cols}
-        for key in ("user_agent", "user-agent", "ua", "agent", "http_user_agent"):
-            if key in lower_map:
-                return lower_map[key]
-        # Fallback: any column containing 'agent'
-        for c in cols:
-            lc = c.lower()
-            if 'user' in lc and 'agent' in lc:
-                return c
-            if lc == 'ua' or lc.endswith('_ua'):
-                return c
-    except Exception:
-        pass
-    return None
-
-
 def _now_ist_str(dt: Optional[datetime] = None) -> str:
     try:
         # Asia/Kolkata is UTC+5:30 fixed offset; compute from UTC
@@ -329,15 +310,10 @@ def build_report(df: pd.DataFrame, reader_name: str, stdlog_count: int, sample_m
         status_counts = pd.Series(dtype=int)
         status_pct = pd.Series(dtype=float)
 
-    # Response size stats: accept common aliases ('bytes', 'size', 'response_size', 'response_bytes')
+    # Bytes stats if present
     bytes_total = bytes_mean = bytes_p50 = bytes_p95 = None
-    bytes_col = None
-    for cand in ("bytes", "size", "response_size", "response_bytes"):
-        if cand in df.columns:
-            bytes_col = cand
-            break
-    if bytes_col:
-        bytes_series = coerce_numeric(df[bytes_col]).fillna(0)
+    if "bytes" in df.columns:
+        bytes_series = coerce_numeric(df["bytes"]).fillna(0)
         try:
             bytes_total = int(bytes_series.sum())
             bytes_mean = float(bytes_series.mean())
@@ -390,39 +366,7 @@ def build_report(df: pd.DataFrame, reader_name: str, stdlog_count: int, sample_m
 
     lines.append("## Parsing Summary")
     lines.append(f"- Total lines: {total}")
-    # Normalize a friendly columns list to match expected output style
-    def _col_exists(*names: str) -> Optional[str]:
-        for n in names:
-            if n in df.columns:
-                return n
-        return None
-    # Build display columns with aliases
-    disp_cols: list[str] = []
-    if _col_exists("ip", "client_ip", "remote_addr"): disp_cols.append("ip")
-    # timestamp alias
-    if _col_exists("timestamp", "datetime", "time", "datetime_obj"): disp_cols.append("timestamp")
-    # request alias (may be reconstructed)
-    req_col = _col_exists("request")
-    if req_col:
-        disp_cols.append("request")
-    else:
-        # reconstruct when method/path exist
-        if _col_exists("method") and _col_exists("path"):
-            disp_cols.append("request")
-    if _col_exists("status"): disp_cols.append("status")
-    if bytes_col: disp_cols.append("bytes")
-    if _col_exists("referer", "referrer"): disp_cols.append("referer")
-    if _col_exists("user_agent", "ua", "http_user_agent"): disp_cols.append("user_agent")
-    if _col_exists("line_num"): disp_cols.append("line_num")
-    if _col_exists("raw_content", "Content"): disp_cols.append("raw_content")
-    if _col_exists("parsed"): disp_cols.append("parsed")
-    if _col_exists("method"): disp_cols.append("method")
-    if _col_exists("path"): disp_cols.append("path")
-    # Fallback to actual DataFrame columns if we couldn't build a friendly list
-    if not disp_cols:
-        lines.append(f"- Columns: {', '.join(df.columns.astype(str))}")
-    else:
-        lines.append(f"- Columns: {', '.join(disp_cols)}")
+    lines.append(f"- Columns: {', '.join(df.columns.astype(str))}")
     lines.append("")
 
     if not status_counts.empty:
@@ -776,13 +720,6 @@ def build_intel_report(
     # Map: category -> indices
     custom_patterns = cfg.get('custom_error_patterns', {}) or {}
     threat_cats = {
-        # New explicit web categories
-        'SQL Injection': ['sqli'],
-        'Dir Traversal': ['traversal'],
-        'Admin Abuse': ['admin_endpoints', 'bad_methods'],
-        'Suspicious UA': ['malicious_ua'],
-        'Error Spikes': ['error_codes'],
-        # Existing categories retained for broader summary/insights
         'Brute Force (High)': ['brute_force'],
         'Low & Slow': ['low_and_slow_attack'],  # placeholder, aggregation below
         'Known Malicious IP': ['malicious_ip'],
@@ -852,7 +789,7 @@ def build_intel_report(
     # If everything is zero, run a simple fallback aggregation tailored to common patterns
     try:
         zero_all = True
-        for k in ['Brute Force (High)', 'Low & Slow', 'Known Malicious IP', 'Application Errors', 'Web Attack Probes', 'SQL Injection', 'Dir Traversal', 'Admin Abuse', 'Suspicious UA', 'Error Spikes']:
+        for k in ['Brute Force (High)', 'Low & Slow', 'Known Malicious IP', 'Application Errors', 'Web Attack Probes']:
             if len(cat_indices.get(k, [])) > 0:
                 zero_all = False
                 break
@@ -880,30 +817,6 @@ def build_intel_report(
             web_simple = msg_series.str.contains(r"(?i)(/etc/passwd|\.{2}/|%2Fetc%2Fshadow|union\s+select|select\s+\*\s+from)", regex=True, na=False)
             if web_simple.any():
                 cat_indices['Web Attack Probes'] = df.index[web_simple].tolist()
-            # SQLi fallback
-            sqli_fb = msg_series.str.contains(r"(?i)(UNION\s+SELECT|'\s*or\s*'1'='1|DROP\s+TABLE)", regex=True, na=False)
-            if sqli_fb.any():
-                cat_indices['SQL Injection'] = df.index[sqli_fb].tolist()
-            # Traversal fallback
-            trav_fb = msg_series.str.contains(r"(?i)(\.\./|%2e%2e%2f|/etc/passwd)", regex=True, na=False)
-            if trav_fb.any():
-                cat_indices['Dir Traversal'] = df.index[trav_fb].tolist()
-            # Admin endpoints fallback
-            admin_fb = msg_series.str.contains(r"(?i)(/admin|/wp-admin|/delete_all)", regex=True, na=False)
-            if admin_fb.any():
-                cat_indices['Admin Abuse'] = df.index[admin_fb].tolist()
-            # Suspicious UA fallback
-            if ua_col := _pick_ua_column(df):
-                ua_series = df[ua_col].astype(str)
-                ua_fb = ua_series.str.contains(r"(?i)(sqlmap|nikto|acunetix|nmap|curl|wget)|^\s*$", regex=True, na=False)
-                if ua_fb.any():
-                    cat_indices['Suspicious UA'] = df.index[ua_fb].tolist()
-            # Error codes fallback (4xx/5xx)
-            if 'status' in df.columns:
-                st = coerce_numeric(df['status']).fillna(-1)
-                err_fb = (st.between(400, 499) | st.between(500, 599))
-                if err_fb.any():
-                    cat_indices['Error Spikes'] = df.index[err_fb].tolist()
     except Exception:
         pass
 
@@ -921,7 +834,6 @@ def build_intel_report(
     except Exception:
         full_source = source
     lines.append(f"- **Source File:** `{full_source}`")
-    lines.append(f"- **Events Analyzed:** {total}")
     lines.append(f"- **Analysis Duration:** `{analysis_dur}`")
     lines.append("")
     lines.append("---")
@@ -952,7 +864,7 @@ def build_intel_report(
     # At-a-glance metrics
     lines.append("")
     lines.append(
-        f"> At a glance: • Total events: {total} • Unique threats: {unique_threats} • Top threat: {top_threat_type} • Duration: {analysis_dur}"
+        f"> At a glance: • Total events: **{total}** • Unique threats: **{unique_threats}** • Top threat: **{top_threat_type}** • Duration: **{analysis_dur}**"
     )
     lines.append("")
     lines.append("---")
@@ -961,8 +873,8 @@ def build_intel_report(
     lines.append("")
     lines.append("*A summary of the highest-risk entities detected during this analysis, ranked by a calculated Threat Score.*")
     lines.append("")
-    lines.append("| Rank | IP Address | Threat Score | Category | Event Count | User-Agent | Notes |")
-    lines.append("| ---- | ---------- | ---------- | ---------------------- | ----------- | --------------------- | --------------------------- |")
+    lines.append("| Rank | Threat Entity | Threat Score | Category | Event Count | Location | ISP | Abuse Score |")
+    lines.append("| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |")
 
     def _cat_for_row() -> str:
         if top_threat_type.startswith("Brute-Force"):
@@ -975,42 +887,22 @@ def build_intel_report(
             return "XSS"
         return "Probing"
 
-    # Build simple per-IP UA and notes from the dataset to match sample style
-    ip_col = _pick_ip_column(df)
-    ua_col = _pick_ua_column(df)
-    def _ua_for_ip(ip: str) -> str:
-        try:
-            if not ip_col or ip_col not in df.columns or not ua_col or ua_col not in df.columns:
-                return ""
-            sample = df[df[ip_col].astype(str) == str(ip)][ua_col].astype(str).value_counts()
-            return sample.index[0][:32] if not sample.empty else ""
-        except Exception:
-            return ""
-    def _notes_for_ip(ip: str) -> str:
-        try:
-            msgs = df.get(msg_col, pd.Series([], dtype=str)).astype(str)
-            sub = msgs[df[ip_col].astype(str) == str(ip)] if ip_col and ip_col in df.columns else msgs.iloc[0:0]
-            text = " ".join(sub.head(10).tolist())
-            if pd.isna(text) or not text:
-                return ""
-            if pd.Series([text]).str.contains(r"(?i)DROP\s+TABLE", regex=True).iloc[0]:
-                return "DROP TABLE probe"
-            if pd.Series([text]).str.contains(r"(?i)UNION\s+SELECT", regex=True).iloc[0]:
-                return "UNION SELECT payload"
-            if pd.Series([text]).str.contains(r"(?i)/etc/passwd|%2fetc%2fpasswd", regex=True).iloc[0]:
-                return "Attempted /etc/passwd"
-            if pd.Series([text]).str.contains(r"(?i)/admin|/delete_all", regex=True).iloc[0]:
-                return "Admin endpoint probe"
-            return ""
-        except Exception:
-            return ""
     for idx, row in enumerate(ranked[: max(3, min(10, len(ranked)))], start=1):
         ip = row.get('ip')
         score = row.get('score') or 0
         events = row.get('events') or 0
-        ua = _ua_for_ip(ip)
-        note = _notes_for_ip(ip)
-        lines.append(f"| {idx} | {ip} | {score}/1000 | {_cat_for_row()} | {events} | {ua or ' '} | {note or ' '} |")
+        country = row.get('country')
+        city = row.get('city')
+        if city and country:
+            loc = f"{city}"
+        elif country:
+            loc = f"{country}"
+        else:
+            loc = "N/A"
+        isp = row.get('isp') or "N/A"
+        abuse = row.get('abuse')
+        abuse_str = f"{abuse}%" if isinstance(abuse, (int, float)) else "N/A"
+        lines.append(f"| {idx} | `{ip}`| {score} | {_cat_for_row()} | {events} | {loc} | {isp} | {abuse_str} |")
 
     # Visual risk bars (compact)
     if ranked:
@@ -1036,30 +928,25 @@ def build_intel_report(
     lines.append("| --- | --- | --- | --- | --- |")
     def _fmt_top(top: List[Tuple[str, int]]) -> str:
         return ", ".join([f"{ip} ({c} events)" for ip, c in top]) if top else ""
-    # Derive summaries for categories used later
-    bfh_cnt, bfh_unique, bfh_top = _summarize_cat('Brute Force (High)')
+    bf_cnt, bf_unique, bf_top = _summarize_cat('Brute Force (High)')
     ls_cnt, ls_unique, ls_top = _summarize_cat('Low & Slow')
     kb_cnt, kb_unique, kb_top = _summarize_cat('Known Malicious IP')
+    app_cnt, app_unique, app_top = _summarize_cat('Application Errors')
     web_cnt, web_unique, web_top = _summarize_cat('Web Attack Probes')
-    sqli_cnt, sqli_unique, sqli_top = _summarize_cat('SQL Injection')
-    trav_cnt, trav_unique, trav_top = _summarize_cat('Dir Traversal')
-    admin_cnt, admin_unique, admin_top = _summarize_cat('Admin Abuse')
-    ua_cnt, ua_unique, ua_top = _summarize_cat('Suspicious UA')
-    err_cnt, err_unique, err_top = _summarize_cat('Error Spikes')
-    if sqli_cnt + trav_cnt + admin_cnt + ua_cnt + err_cnt == 0:
+    if bf_cnt + ls_cnt + kb_cnt + app_cnt + web_cnt == 0:
         lines.append("| (none) | 0 | 0 |  |  |")
     else:
-        lines.append(f"| **SQL Injection** | {sqli_cnt} | {sqli_unique} | {_fmt_top(sqli_top)} | UNION/DROP/logic bypass payloads |")
-        lines.append(f"| **Dir Traversal** | {trav_cnt} | {trav_unique} | {_fmt_top(trav_top)} | `/etc/passwd`, `../` probes |")
-        lines.append(f"| **Admin Abuse** | {admin_cnt} | {admin_unique} | {_fmt_top(admin_top)} | `/admin`/`delete_all` probes |")
-        lines.append(f"| **Suspicious UA** | {ua_cnt} | {ua_unique} | {_fmt_top(ua_top)} | sqlmap, Nmap, empty UA |")
-        lines.append(f"| **Error Spikes** | {err_cnt} | {err_unique} | {_fmt_top(err_top)} | 4xx/5xx during probing |")
+        lines.append(f"| Brute Force (High) | {bf_cnt} | {bf_unique} | {_fmt_top(bf_top)} | Detected high-volume failed logins |")
+        lines.append(f"| Low & Slow | {ls_cnt} | {ls_unique} | {_fmt_top(ls_top)} | Low-frequency distributed failures |")
+        lines.append(f"| Known Malicious IP | {kb_cnt} | {kb_unique} | {_fmt_top(kb_top)} | Matches threat intel feed |")
+        lines.append(f"| Application Errors | {app_cnt} | {app_unique} | {_fmt_top(app_top)} | App/runtime failures |")
+        lines.append(f"| Web Attack Probes | {web_cnt} | {web_unique} | {_fmt_top(web_top)} | Traversal/SQLi/XSS indicators |")
     lines.append("")
 
     # Top Threat IPs derived from our summaries (prefer brute force > known bad > web)
     lines.append("## Top Threat IPs")
     rank_ips: List[Tuple[str, str, int]] = []  # (ip, reason, count)
-    for ip, c in bfh_top[:3]:
+    for ip, c in bf_top[:3]:
         rank_ips.append((ip, "Brute-force attacker", c))
     for ip, c in ls_top[:3]:
         rank_ips.append((ip, "Low-and-slow brute force", c))

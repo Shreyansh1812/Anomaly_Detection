@@ -1,0 +1,22 @@
+Isolation Forest Log Analysis Report
+====================================
+
+Total log entries tested : 100
+Features per entry       : 28
+Anomalies detected       : 10
+Anomaly percentage       : 10.0%
+Threshold used (10% quantile): 0.000
+
+Critical Anomalies (WARN/ERROR or rare INFO):
+1. [Entry 49] [ERROR] [ServiceCrash] 2025-09-18 09:03:50,876 ERROR [ServiceCrash] Service 'redis' terminated unexpectedly        <-- anomaly → Score: -0.026
+2. [Entry 81] [ERROR] [ServiceCrash] 2025-09-18 09:06:30,210 ERROR [ServiceCrash] Service 'docker' terminated unexpectedly       <-- anomaly → Score: -0.022
+3. [Entry 15] [ERROR] [DiskManager] 2025-09-18 09:01:00,456 ERROR [DiskManager] Disk read failure on /dev/sda1                  <-- anomaly → Score: -0.020
+4. [Entry 72] [ERROR] [Kernel] 2025-09-18 09:05:45,210 ERROR [Kernel] Unexpected shutdown signal                           <-- anomaly → Score: -0.018
+5. [Entry 24] [ERROR] [Kernel] 2025-09-18 09:01:45,876 ERROR [Kernel] Panic occurred, reboot required                       <-- anomaly → Score: -0.009
+6. [Entry 66] [WARN] [ServiceStop] 2025-09-18 09:05:15,876 WARN [ServiceStop] Service 'ssh' stopped unexpectedly               <-- anomaly → Score: -0.006
+7. [Entry 19] [WARN] [FileAccess] 2025-09-18 09:01:20,654 WARN [FileAccess] User 'guest' attempted to access /etc/passwd      <-- anomaly → Score: -0.002
+8. [Entry 40] [ERROR] [DiskManager] 2025-09-18 09:03:05,876 ERROR [DiskManager] Disk write failure on /dev/sda1                 <-- anomaly → Score: -0.001
+9. [Entry 55] [ERROR] [DiskManager] 2025-09-18 09:04:20,876 ERROR [DiskManager] SMART failure detected on /dev/sda1             <-- anomaly → Score: -0.001
+10. [Entry 11] [WARN] [Auth] 2025-09-18 09:00:40,543 WARN [Auth] Failed login attempt for user 'guest' from 10.0.0.5      <-- anomaly → Score: -0.000
+
+Benign Anomalies (common INFO events):

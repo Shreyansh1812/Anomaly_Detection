@@ -57,7 +57,7 @@ def main():
     ap = argparse.ArgumentParser(description="Interactive end-to-end report generator (regex-only)")
     ap.add_argument("--input", help="Path to input log/CSV (prompted if omitted)")
     ap.add_argument("--output", help="Output report .md (default: Reports/<name>_report_intel.md)")
-    ap.add_argument("--template", choices=["intel", "standard"], default="standard", help="Report template (default: standard)")
+    ap.add_argument("--template", choices=["intel", "standard"], default="intel", help="Report template (default: intel)")
     args = ap.parse_args()
 
     in_path = Path(args.input).resolve() if args.input else prompt_for_path("Please Enter the path o f the file .. ")
