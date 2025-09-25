@@ -1,0 +1,47 @@
+Isolation Forest Log Analysis Report
+====================================
+
+Total log entries tested : 203
+Features per entry       : 43
+Anomalies detected       : 35
+Anomaly percentage       : 17.2%
+Threshold used (5% quantile): 0.000
+
+Critical Anomalies (WARN/ERROR or rare INFO):
+1. [Entry 139] [WARN] [FileSystem] 2025-09-18 09:03:16,234 WARN [FileSystem] SMART health check failure detected on /dev/sdb. → Score: -0.064
+2. [Entry 107] [ERROR] [Kernel] 2025-09-18 09:02:30,999 ERROR [Kernel] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0). → Score: -0.050
+3. [Entry 38] [WARN] [FileSystem] 2025-09-18 09:00:53,111 WARN [FileSystem] SMART health check failure detected on /dev/sdc. → Score: -0.048
+4. [Entry 197] [ERROR] [Security] 2025-09-18 09:04:38,444 ERROR [Security] Unauthorized access attempt to '/var/www/html/config.php' by user 'charlie' from 192.168.1.151. → Score: -0.038
+5. [Entry 146] [ERROR] [Security] 2025-09-18 09:03:26,111 ERROR [Security] Unauthorized access attempt to '/etc/passwd' by user 'guest' from 8.8.8.8. → Score: -0.038
+6. [Entry 95] [ERROR] [Security] 2025-09-18 09:02:13,999 ERROR [Security] Unauthorized access attempt to '/data/db/mysql.sock' by user 'guest' from 10.0.0.100. → Score: -0.035
+7. [Entry 63] [ERROR] [Security] 2025-09-18 09:01:28,654 ERROR [Security] Unauthorized access attempt to '/root/.ssh/authorized_keys' by user 'bob' from 172.16.31.5. → Score: -0.034
+8. [Entry 85] [ERROR] [FileSystem] 2025-09-18 09:01:59,876 ERROR [FileSystem] Disk I/O error on /dev/sdb: write failed. → Score: -0.032
+9. [Entry 151] [WARN] [Database] 2025-09-18 09:03:33,234 WARN [Database] High number of failed queries from user 'charlie'. → Score: -0.029
+10. [Entry 157] [ERROR] [UserAuth] 2025-09-18 09:03:41,876 ERROR [UserAuth] Failed login attempt for user 'alice' from 1.1.1.1. → Score: -0.029
+11. [Entry 21] [ERROR] [Security] 2025-09-18 09:00:29,002 ERROR [Security] Unauthorized access attempt to '/etc/shadow' by user 'guest' from 10.0.0.5. → Score: -0.023
+12. [Entry 184] [ERROR] [FileSystem] 2025-09-18 09:04:20,001 ERROR [FileSystem] Disk I/O error on /dev/sdc: read failed. → Score: -0.023
+13. [Entry 8] [WARN] [Network] 2025-09-18 09:00:11,023 WARN [Network] Suspicious outbound traffic to 198.51.100.89:4444. Potential data exfiltration detected. → Score: -0.020
+14. [Entry 33] [ERROR] [Kernel] 2025-09-18 09:00:46,098 ERROR [Kernel] Kernel panic - not syncing: Out of memory. → Score: -0.020
+15. [Entry 132] [ERROR] [Network] 2025-09-18 09:03:06,321 ERROR [Network] Suspicious outbound traffic to 52.94.237.248:6666. Potential data exfiltration detected. → Score: -0.017
+16. [Entry 114] [WARN] [FileSystem] 2025-09-18 09:02:40,987 WARN [FileSystem] Disk I/O error on /dev/sda: write failed. → Score: -0.017
+17. [Entry 164] [WARN] [Docker] 2025-09-18 09:03:51,765 WARN [Docker] Container 'payment_gateway' failed to start. Exit code 127. → Score: -0.017
+18. [Entry 17] [WARN] [FileSystem] 2025-09-18 09:00:23,456 WARN [FileSystem] Disk I/O error on /dev/sdb: read failed. → Score: -0.016
+19. [Entry 169] [ERROR] [ServiceCrash] 2025-09-18 09:03:58,876 ERROR [ServiceCrash] Service 'kafka' crashed unexpectedly. Restarting attempt 2. → Score: -0.014
+20. [Entry 74] [ERROR] [Network] 2025-09-18 09:01:44,111 ERROR [Network] Suspicious outbound traffic to 104.18.30.124:8000. Potential data exfiltration detected. → Score: -0.013
+21. [Entry 90] [WARN] [ServiceCrash] 2025-09-18 09:02:06,987 WARN [ServiceCrash] Service 'redis' crashed unexpectedly. Restarting attempt 1. → Score: -0.013
+22. [Entry 191] [WARN] [Network] 2025-09-18 09:04:29,999 WARN [Network] Suspicious outbound traffic to 185.125.190.27:53. Potential data exfiltration detected. → Score: -0.011
+23. [Entry 26] [WARN] [UserAuth] 2025-09-18 09:00:36,123 WARN [UserAuth] Unauthorized login attempt for non-existent user 'scanner' from 45.55.120.98. → Score: -0.010
+24. [Entry 47] [WARN] [Database] 2025-09-18 09:01:05,999 WARN [Database] High number of failed queries from user 'guest'. → Score: -0.009
+25. [Entry 68] [WARN] [Docker] 2025-09-18 09:01:35,765 WARN [Docker] Container 'legacy_api' failed to start. Exit code 1. → Score: -0.008
+26. [Entry 126] [WARN] [UserAuth] 2025-09-18 09:02:57,987 WARN [UserAuth] Unauthorized login attempt for non-existent user 'support' from 103.22.201.5. → Score: -0.007
+27. [Entry 120] [ERROR] [ServiceCrash] 2025-09-18 09:02:49,321 ERROR [ServiceCrash] Service 'mysql' crashed unexpectedly. Restarting attempt 1. → Score: -0.006
+28. [Entry 52] [ERROR] [ServiceCrash] 2025-09-18 09:01:13,001 ERROR [ServiceCrash] Service 'nginx' crashed unexpectedly. Restarting attempt 1. → Score: -0.005
+29. [Entry 102] [WARN] [UserAuth] 2025-09-18 09:02:23,987 WARN [UserAuth] Failed login attempt for user 'root' from 203.0.113.45. → Score: -0.003
+30. [Entry 13] [ERROR] [ServiceCrash] 2025-09-18 09:00:18,001 ERROR [ServiceCrash] Service 'kafka' crashed unexpectedly. Restarting attempt 1. → Score: -0.001
+31. [Entry 176] [WARN] [UserAuth] 2025-09-18 09:04:08,765 WARN [UserAuth] Failed login attempt for user 'admin' from 203.0.113.45. → Score: -0.000
+32. [Entry 42] [ERROR] [UserAuth] 2025-09-18 09:00:58,987 ERROR [UserAuth] Failed login attempt for user 'admin' from 198.51.100.89. → Score: 0.000
+33. [Entry 4] [ERROR] [UserAuth] 2025-09-18 09:00:05,754 ERROR [UserAuth] Failed login attempt for user 'root' from 203.0.113.45. → Score: 0.000
+34. [Entry 79] [WARN] [UserAuth] 2025-09-18 09:01:51,234 WARN [UserAuth] Unauthorized login attempt for non-existent user 'oracle' from 1.1.1.1. → Score: 0.002
+35. [Entry 59] [WARN] [UserAuth] 2025-09-18 09:01:22,999 WARN [UserAuth] Failed login attempt for user 'charlie' from 8.8.8.8. → Score: 0.012
+
+Benign Anomalies (common INFO events):
