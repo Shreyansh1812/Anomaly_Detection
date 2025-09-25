@@ -1,0 +1,60 @@
+Isolation Forest Log Analysis Report
+====================================
+
+Total log entries tested : 352
+Features per entry       : 64
+Anomalies detected       : 48
+Anomaly percentage       : 13.6%
+Threshold used (5% quantile): -0.000
+
+Critical Anomalies (WARN/ERROR or rare INFO):
+1. [Entry 136] [ERROR] [auth] 2025-09-23 19:57:39,953 ERROR [auth] LDAP server is unreachable. Authentication services degraded. → Score: -0.073
+2. [Entry 56] [WARN] [Security] 2025-09-23 19:56:03,073 WARN [Security] Atypical login time for user 'admin' from 8.8.8.8. → Score: -0.070
+3. [Entry 105] [ERROR] [Security] 2025-09-23 19:57:02,412 ERROR [Security] User 'auditor' attempted to execute '/bin/bash' from web shell. → Score: -0.068
+4. [Entry 17] [WARN] [API] 2025-09-23 19:55:20,688 WARN [API] Request to /api/v1/data completed in 3450ms. High latency detected. → Score: -0.061
+5. [Entry 182] [WARN] [System] 2025-09-23 19:58:35,659 WARN [System] Low memory warning. Available memory: 150MB. → Score: -0.060
+6. [Entry 198] [ERROR] [API] 2025-09-23 19:58:55,035 ERROR [API] Unhandled exception in /api/v1/data: TypeError. → Score: -0.059
+7. [Entry 334] [WARN] [Security] 2025-09-23 20:01:39,731 WARN [Security] Password reuse detected for user 'bob' on multiple services. → Score: -0.056
+8. [Entry 42] [ERROR] [redis] 2025-09-23 19:55:50,963 ERROR [redis] ConfigurationError: Max memory limit exceeded. Evicting keys. → Score: -0.056
+9. [Entry 163] [ERROR] [kafka] 2025-09-23 19:58:12,650 ERROR [kafka] Broker not available. Failed to send message. Topic: user-events. → Score: -0.053
+10. [Entry 228] [ERROR] [Docker] 2025-09-23 19:59:31,365 ERROR [Docker] Image pull failed for 'new-feature:latest'. Repository not found. → Score: -0.050
+11. [Entry 314] [ERROR] [kernel] 2025-09-23 20:01:15,511 ERROR [kernel] Out of memory: Kill process 12345 (java) score 987 or sacrifice child. → Score: -0.050
+12. [Entry 286] [ERROR] [System] 2025-09-23 20:00:41,603 ERROR [System] CRON job 'nightly-report' failed with exit code 1. → Score: -0.048
+13. [Entry 118] [WARN] [nginx] 2025-09-23 19:57:18,155 WARN [nginx] Certificate renewal failed for domain 'example.com'. Retrying in 24 hours. → Score: -0.047
+14. [Entry 269] [WARN] [sshd] 2025-09-23 20:00:21,016 WARN [sshd] Connection closed by authenticating user test 1.1.1.1 port 12345 [preauth] → Score: -0.046
+15. [Entry 254] [ERROR] [nginx] 2025-09-23 20:00:02,851 ERROR [nginx] Upstream server connection failed for 'api_gateway'. → Score: -0.044
+16. [Entry 298] [WARN] [java] 2025-09-23 20:00:56,135 WARN [java] GC overhead limit exceeded. → Score: -0.044
+17. [Entry 212] [WARN] [UserAuth] 2025-09-23 19:59:11,989 WARN [UserAuth] Multiple concurrent sessions detected for user 'alice'. → Score: -0.038
+18. [Entry 87] [WARN] [Database] 2025-09-23 19:56:40,614 WARN [Database] Connection pool exhausted. Waiting for available connection. → Score: -0.035
+19. [Entry 50] [INFO] [...] ... → Score: -0.035
+20. [Entry 53] [INFO] [...] ... → Score: -0.035
+21. [Entry 152] [WARN] [DNS] 2025-09-23 19:57:59,329 WARN [DNS] Unexpected DNS query for suspicious domain 'malware-c2.xyz' from 10.0.0.16. → Score: -0.031
+22. [Entry 52] [INFO] [//] // I will generate the full 400 lines as requested. → Score: -0.026
+23. [Entry 51] [INFO] [//] // The file continues with similar entries, maintaining the ~5% anomaly ratio. → Score: -0.020
+24. [Entry 46] [INFO] [API] 2025-09-23 19:55:55,807 INFO [API] Request to /api/v1/payment completed in 150ms. → Score: -0.018
+25. [Entry 255] [INFO] [nginx] 2025-09-23 20:00:04,062 INFO [nginx] 192.168.1.58 - "POST /api/payment HTTP/1.1" 502 → Score: -0.016
+26. [Entry 75] [ERROR] [mysql] 2025-09-23 19:56:26,082 ERROR [mysql] DependencyError: Required library 'lib_extra.so' not found. → Score: -0.014
+27. [Entry 238] [WARN] [mysql] 2025-09-23 19:59:43,475 WARN [mysql] Slow query detected. Query took 4500ms to execute. → Score: -0.014
+28. [Entry 45] [INFO] [nginx] 2025-09-23 19:55:54,596 INFO [nginx] 192.168.1.55 - "POST /api/payment HTTP/1.1" 200 → Score: -0.009
+29. [Entry 304] [INFO] [nginx] 2025-09-23 20:01:03,401 INFO [nginx] 192.168.1.56 - "GET /styles.css HTTP/1.1" 200 → Score: -0.008
+30. [Entry 248] [INFO] [API] 2025-09-23 19:59:55,585 INFO [API] Request to /api/v1/users completed in 27ms. → Score: -0.006
+31. [Entry 99] [INFO] [API] 2025-09-23 19:56:55,146 INFO [API] Request to /api/v1/products completed in 51ms. → Score: -0.006
+32. [Entry 116] [INFO] [Docker] 2025-09-23 19:57:15,733 INFO [Docker] Container 'payment-gateway' is running. → Score: -0.005
+33. [Entry 144] [INFO] [Docker] 2025-09-23 19:57:49,641 INFO [Docker] Container 'frontend-prod' is running. → Score: -0.005
+34. [Entry 125] [INFO] [Docker] 2025-09-23 19:57:26,632 INFO [Docker] Container 'log-aggregator' is running. → Score: -0.005
+35. [Entry 134] [INFO] [Docker] 2025-09-23 19:57:37,531 INFO [Docker] Container 'backup-job' is running. → Score: -0.005
+36. [Entry 103] [INFO] [API] 2025-09-23 19:56:59,990 INFO [API] Request to /api/v1/status completed in 19ms. → Score: -0.004
+37. [Entry 113] [INFO] [DiskUsage] 2025-09-23 19:57:12,100 INFO [DiskUsage] Disk usage check: /dev/sda1 is 47% full. → Score: -0.003
+38. [Entry 131] [INFO] [DiskUsage] 2025-09-23 19:57:33,898 INFO [DiskUsage] Disk usage check: /dev/sda1 is 48% full. → Score: -0.003
+39. [Entry 172] [INFO] [API] 2025-09-23 19:58:23,549 INFO [API] Request to /api/v1/status completed in 20ms. → Score: -0.003
+40. [Entry 323] [INFO] [nginx] 2025-09-23 20:01:26,410 INFO [nginx] 192.168.1.59 - "POST /api/payment HTTP/1.1" 200 → Score: -0.002
+41. [Entry 340] [INFO] [Docker] 2025-09-23 20:01:46,997 INFO [Docker] Container 'backup-job' is running. → Score: -0.001
+42. [Entry 330] [INFO] [Docker] 2025-09-23 20:01:34,887 INFO [Docker] Container 'log-aggregator' is running. → Score: -0.001
+43. [Entry 349] [INFO] [Docker] 2025-09-23 20:01:57,896 INFO [Docker] Container 'frontend-prod' is running. → Score: -0.001
+44. [Entry 322] [INFO] [Docker] 2025-09-23 20:01:25,199 INFO [Docker] Container 'payment-gateway' is running. → Score: -0.001
+45. [Entry 199] [INFO] [UserAuth] 2025-09-23 19:58:56,246 INFO [UserAuth] User 'dev_ops' logged in successfully from 127.0.0.1. → Score: -0.001
+46. [Entry 5] [INFO] [Docker] 2025-09-23 19:55:06,156 INFO [Docker] Container 'frontend-prod' is running. → Score: -0.000
+47. [Entry 301] [INFO] [Docker] 2025-09-23 20:00:59,768 INFO [Docker] Container 'redis-cache' is running. → Score: -0.000
+48. [Entry 201] [INFO] [mysql] 2025-09-23 19:58:58,668 INFO [mysql] Connection established for user 'backup_user' from 127.0.0.1. → Score: -0.000
+
+Benign Anomalies (common INFO events):
