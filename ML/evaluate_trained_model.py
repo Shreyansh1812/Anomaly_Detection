@@ -1,64 +1,137 @@
-import os
+from __future__ import annotations
+
 import argparse
 import json
+import os
+import sys
 from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
 import numpy as np
 import pandas as pd
-import joblib
 from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.exceptions import InconsistentVersionWarning
+try:
+    from sklearn.exceptions import InconsistentVersionWarning
+except (ImportError, AttributeError):
+    class InconsistentVersionWarning(UserWarning):
+        """Fallback warning when running on older/newer scikit-learn versions."""
+        pass
+import warnings
 
-import sys
-# Support running as a script from within the ML folder
-if __package__ is None or __package__ == "":
-    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    if repo_root not in sys.path:
-        sys.path.insert(0, repo_root)
-    from ML.robust_anomaly_trainer import parse_log_file, extract_features
-else:
-    from .robust_anomaly_trainer import parse_log_file, extract_features
+# allow local imports
+ROOT_DIR = Path(__file__).resolve().parents[1]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
+from ML.robust_anomaly_trainer import parse_log_file
+from src.anomaly_detection_engine import LogAnomalyDetector
+
+warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
 
 ANOMALY_LEVELS = {"WARN", "ERROR", "FATAL", "CRITICAL"}
 
-
-def load_artifacts(model_dir: str):
-    model = joblib.load(os.path.join(model_dir, "model.joblib"))
-    tfidf = joblib.load(os.path.join(model_dir, "tfidf.joblib"))
-    scaler = joblib.load(os.path.join(model_dir, "scaler.joblib"))
-    feature_columns = joblib.load(os.path.join(model_dir, "feature_columns.joblib"))
-    meta_path = os.path.join(model_dir, "model_meta.json")
-    meta = None
-    if os.path.exists(meta_path):
-        with open(meta_path, "r", encoding="utf-8") as f:
-            meta = json.load(f)
-    return model, tfidf, scaler, feature_columns, meta
+SUGGESTION_MAP = {
+    "sshd": "Repeated authentication failures—tighten SSH access controls and monitor offending IPs.",
+    "pam_unix": "Credential-related issues—enforce strong passwords and investigate user accounts.",
+    "database": "Database connectivity problems—check DB availability and network paths.",
+    "mysql": "MySQL errors—verify service health and firewall settings.",
+    "kernel": "Kernel/system faults—inspect hardware resources and recent kernel changes.",
+    "httpd": "HTTP service anomalies—inspect web server configs and client behavior.",
+}
 
 
-def evaluate_on_file(path: str, model, tfidf, scaler, feature_columns, meta=None):
+def count_file_lines(path: str) -> int:
+    try:
+        with open(path, "r", encoding="utf-8", errors="ignore") as f:
+            total = sum(1 for _ in f)
+        if path.lower().endswith(".csv") and total > 0:
+            return max(total - 1, 0)
+        return total
+    except Exception:
+        return 0
+
+
+def summarize_root_cause(df_subset: pd.DataFrame):
+    if df_subset.empty:
+        return {
+            "module": None,
+            "description": "No anomalies detected—system operating within expected parameters.",
+            "suggestion": "Continue monitoring; no immediate remediation required.",
+        }
+    top_module = df_subset["module"].value_counts().idxmax()
+    suggestion = None
+    for key, msg in SUGGESTION_MAP.items():
+        if key in str(top_module or "").lower():
+            suggestion = msg
+            break
+    if not suggestion:
+        suggestion = "Review the highlighted module for misconfiguration or unusual activity."
+    description = f"Most anomalies originate from module '{top_module}'."
+    return {"module": top_module, "description": description, "suggestion": suggestion}
+
+
+def format_anomaly_entries(df_subset: pd.DataFrame):
+    entries = []
+    for _, row in df_subset.iterrows():
+        entries.append(
+            f"{row['timestamp']} – {row['log_level']} [{row['module']}] {row['message']}"
+        )
+    return entries
+
+
+def evaluate_on_file(
+    path: str,
+    detector: Optional[LogAnomalyDetector] = None,
+):
     df = parse_log_file(path)
     if df.empty:
         print(f"[WARN] No valid data in {path}; skipping.")
         return None
+
+    df = df.reset_index(drop=True)
+    total_lines = count_file_lines(path)
     df["is_anomaly"] = df["log_level"].apply(lambda x: 1 if x in ANOMALY_LEVELS else 0)
 
-    X, _, _ = extract_features(df.drop("is_anomaly", axis=1), tfidf_vectorizer=tfidf, scaler=scaler)
-    X = X.reindex(columns=feature_columns, fill_value=0)
+    detector_records: List[Dict[str, Any]] = []
+    if detector is not None:
+        enriched = df.reset_index().rename(columns={"index": "_row_index"})
+        for _, row in enriched.iterrows():
+            record = {
+                "timestamp": str(row.get("timestamp", "")),
+                "log_level": str(row.get("log_level", "")),
+                "module": str(row.get("module", "")),
+                "message": str(row.get("message", "")),
+                "_row_index": int(row.get("_row_index", 0)),
+            }
+            for ip_field in ("ip", "client_ip", "source_ip"):
+                if ip_field in row.index:
+                    record[ip_field] = row.get(ip_field)
+            detector_records.append(record)
 
-    preds_binary = None
-    if meta and meta.get("type") == "supervised" and hasattr(model, "predict_proba"):
-        thr = float(meta.get("threshold", 0.5))
-        proba = model.predict_proba(X)[:, 1]
-        preds_binary = (proba >= thr).astype(int)
-    else:
-        preds = model.predict(X)
-        preds_binary = np.where(preds == -1, 1, 0)
+    rule_based_hits = detector.detect(detector_records) if detector else []
 
-    report = classification_report(df["is_anomaly"], preds_binary, output_dict=True, zero_division=0)
+    preds_binary = np.zeros(len(df), dtype=int)
+    for hit in rule_based_hits:
+        row_idx = hit.get("log", {}).get("_row_index")
+        if row_idx is None:
+            continue
+        try:
+            preds_binary[int(row_idx)] = 1
+        except (ValueError, IndexError):
+            continue
+
+    report = classification_report(
+        df["is_anomaly"], preds_binary, output_dict=True, zero_division=0
+    )
     cm = confusion_matrix(df["is_anomaly"], preds_binary)
 
-    # Collect top anomalies for qualitative review
     anomalies_idx = np.where(preds_binary == 1)[0]
-    preview = df.iloc[anomalies_idx][["timestamp", "log_level", "module", "message"]].head(20)
+    anomaly_rows = df.iloc[anomalies_idx]
+    preview = anomaly_rows[["timestamp", "log_level", "module", "message"]].head(20)
+
+    severity_alerts = sum("severity" in hit.get("reasons", []) for hit in rule_based_hits)
 
     return {
         "file": path,
@@ -66,59 +139,97 @@ def evaluate_on_file(path: str, model, tfidf, scaler, feature_columns, meta=None
         "confusion_matrix": cm.tolist(),
         "anomaly_preview": preview.to_dict(orient="records"),
         "counts": {
+            "raw_total": int(total_lines or len(df)),
             "total": int(len(df)),
             "true_anomalies": int(df["is_anomaly"].sum()),
-            "predicted_anomalies": int(int((preds_binary == 1).sum())),
+            "predicted_anomalies": int((preds_binary == 1).sum()),
+            "rule_alerts": len(rule_based_hits),
+            "severity_alerts": int(severity_alerts),
         },
+        "anomaly_entries": format_anomaly_entries(anomaly_rows),
+        "root_cause": summarize_root_cause(anomaly_rows),
+        "rule_based_hits": rule_based_hits,
     }
 
 
-def main():
-    ap = argparse.ArgumentParser(description="Evaluate a trained anomaly model on CSV logs")
-    ap.add_argument("--model-dir", default=".", help="Directory containing model.joblib and preprocessors")
-    ap.add_argument("--files", nargs="+", required=True, help="One or more CSV file paths to evaluate")
-    ap.add_argument("--out", default=None, help="Optional path to write a JSON and CSV report")
-    args = ap.parse_args()
+def save_report(out_path: Path, results: List[Dict]):
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "files": results,
+    }
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+    print(f"[INFO] Saved evaluation summary to {out_path}")
 
-    model, tfidf, scaler, feature_columns, meta = load_artifacts(args.model_dir)
+
+def main():
+    parser = argparse.ArgumentParser(description="Evaluate trained anomaly model on logs.")
+    parser.add_argument(
+        "--files",
+        nargs="+",
+        required=True,
+        help="One or more log files/CSVs to evaluate.",
+    )
+    parser.add_argument("--out", help="Optional JSON file to store full results.")
+    parser.add_argument(
+        "--disable-rule-detector",
+        action="store_true",
+        help="Skip the rule-based LogAnomalyDetector augmentation.",
+    )
+    args = parser.parse_args()
+
+    detector = None if args.disable_rule_detector else LogAnomalyDetector()
 
     results = []
-    summary_rows = []
     for f in args.files:
-        res = evaluate_on_file(f, model, tfidf, scaler, feature_columns, meta)
-        if not res:
-            continue
-        results.append(res)
+        res = evaluate_on_file(
+            f,
+            detector=detector,
+        )
+        if res:
+            results.append(res)
+
+    if args.out and results:
+        save_report(Path(args.out), results)
+
+    if not results:
+        print("[WARN] No evaluation results to display.")
+        return
+
+    for res in results:
+        f = res["file"]
         rep = res["report"]
-        summary_rows.append({
-            "file": os.path.basename(f),
-            "accuracy": rep.get("accuracy", 0.0),
-            "f1_anomaly": rep.get("1", {}).get("f1-score", 0.0),
-            "recall_anomaly": rep.get("1", {}).get("recall", 0.0),
-            "precision_anomaly": rep.get("1", {}).get("precision", 0.0),
-            "true_anomalies": res["counts"]["true_anomalies"],
-            "predicted_anomalies": res["counts"]["predicted_anomalies"],
-            "total": res["counts"]["total"],
-        })
+        precision = rep.get("1", {}).get("precision", 0.0)
+        recall = rep.get("1", {}).get("recall", 0.0)
 
-        # Pretty print per-file summary
         print(f"\n=== {os.path.basename(f)} ===")
-        print(f"Total={summary_rows[-1]['total']} true_anom={summary_rows[-1]['true_anomalies']} pred_anom={summary_rows[-1]['predicted_anomalies']}")
-        print(f"Accuracy={summary_rows[-1]['accuracy']:.3f} F1(Anom)={summary_rows[-1]['f1_anomaly']:.3f} Recall(Anom)={summary_rows[-1]['recall_anomaly']:.3f}")
-        print("Top anomalies preview:")
-        for r in res["anomaly_preview"]:
-            print(f" - [{r['timestamp']}] {r['log_level']} [{r['module']}] {r['message']}")
+        print(f"Total Lines : {res['counts']['raw_total']}")
+        print(f"Read Lines : {res['counts']['total']}")
+        print(f"Recall : {recall:.3f}")
+        print(f"Precision : {precision:.3f}")
+        print("\nList of Anomalies recorded :")
+        if res["anomaly_entries"]:
+            for idx, entry in enumerate(res["anomaly_entries"], 1):
+                print(f"{idx}. {entry}")
+        else:
+            print("(No anomalies were flagged for this file.)")
 
-    if args.out:
-        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        out_base = args.out
-        os.makedirs(os.path.dirname(out_base), exist_ok=True)
-        # JSON dump with full details
-        with open(out_base + f"_{ts}.json", "w", encoding="utf-8") as f:
-            json.dump(results, f, indent=2)
-        # CSV summary
-        pd.DataFrame(summary_rows).to_csv(out_base + f"_{ts}.csv", index=False)
-        print(f"\n[REPORT] Wrote reports to {out_base}_{ts}.json and .csv")
+        if res.get("rule_based_hits"):
+            print("\nRule-based detector alerts:")
+            for idx, hit in enumerate(res["rule_based_hits"], 1):
+                reasons = ",".join(hit.get("reasons", []))
+                msg = hit.get("log", {}).get("message", "")
+                print(f"{idx}. [{reasons}] {msg}")
+        else:
+            print("\nRule-based detector alerts: (none)")
+
+        root = res["root_cause"]
+        print(
+            "\nThe Major cause / location from where the anomalies are coming and a small suggestion"
+        )
+        print(f"Cause : {root['description']}")
+        print(f"Suggestion : {root['suggestion']}")
 
 
 if __name__ == "__main__":

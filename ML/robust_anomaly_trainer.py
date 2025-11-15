@@ -255,6 +255,97 @@ def _parse_hdfs_row(row):
         'message': str(row['Content']).strip()
     }
 
+
+APACHE_COMBINED_REGEX = re.compile(
+    r'^(?P<ip>\S+)\s+(?P<ident>\S+)\s+(?P<user>\S+)\s+\[(?P<timestamp>[^\]]+)\]\s+'
+    r'"(?P<request>[^"]*)"\s+(?P<status>\d{3})\s+(?P<size>\d+|-)'
+    r'(?:\s+"(?P<referrer>[^"]*)")?'
+    r'(?:\s+"(?P<user_agent>[^"]*)")?\s*$'
+)
+
+APACHE_TIMESTAMP_FIRST_REGEX = re.compile(
+    r'^\[(?P<timestamp>[^\]]+)\]\s+(?P<ip>\S+)\s+' 
+    r'"(?P<method>[A-Z]+)\s+(?P<path>[^"\s]+)\s+HTTP/(?P<http_version>[0-9.]+)"\s+' 
+    r'(?P<status>\d{3})\s+(?P<size>\d+|-)'
+    r'(?:\s+"(?P<user_agent>[^\"]*)")?\s*$'
+)
+
+
+def _format_apache_timestamp(raw_ts):
+    try:
+        normalized = raw_ts.replace('Z', '+00:00')
+        dt = datetime.fromisoformat(normalized)
+        return dt.strftime('%Y-%m-%d %H:%M:%S,%f')[:-3]
+    except Exception:
+        try:
+            dt = datetime.strptime(raw_ts, '%d/%b/%Y:%H:%M:%S %z')
+            return dt.strftime('%Y-%m-%d %H:%M:%S,%f')[:-3]
+        except Exception:
+            return raw_ts
+
+
+def _parse_apache_combined_line(line):
+    variant = 'timestamp_first'
+    match = APACHE_TIMESTAMP_FIRST_REGEX.match(line)
+    if not match:
+        variant = 'combined'
+        match = APACHE_COMBINED_REGEX.match(line)
+    if not match:
+        return None
+
+    ts_raw = match.group('timestamp')
+    ip = match.group('ip')
+
+    if variant == 'timestamp_first':
+        method = match.group('method').upper()
+        path = match.group('path')
+        status = int(match.group('status'))
+        size_raw = match.group('size')
+        referrer = ''
+        user_agent = match.group('user_agent') or ''
+    else:
+        request = match.group('request') or ''
+        parts = request.split()
+        method = parts[0].upper() if parts else ''
+        path = parts[1] if len(parts) >= 2 else ''
+        status = int(match.group('status'))
+        size_raw = match.group('size')
+        referrer = match.group('referrer') or ''
+        user_agent = match.group('user_agent') or ''
+
+    if status >= 500:
+        level = 'ERROR'
+    elif status >= 400:
+        level = 'WARN'
+    else:
+        level = 'INFO'
+
+    try:
+        size = int(size_raw)
+    except (TypeError, ValueError):
+        size = 0
+
+    ts = _format_apache_timestamp(ts_raw)
+    message_bits = [f"{method} {path}".strip(), f"status={status}", f"bytes={size}", f"ip={ip}"]
+    if referrer:
+        message_bits.append(f"ref=\"{referrer}\"")
+    if user_agent:
+        message_bits.append(f"ua=\"{user_agent}\"")
+    message = ' '.join(bit for bit in message_bits if bit)
+
+    return {
+        'timestamp': ts,
+        'log_level': level,
+        'module': 'HTTP_ACCESS',
+        'message': message,
+        'ip': ip,
+        'http_status': status,
+        'http_method': method,
+        'path': path,
+        'user_agent': user_agent,
+        'response_bytes': size,
+    }
+
 def parse_log_file(filepath):
     """
     Parses a log file, detecting if it's a standard text log or a known CSV format.
@@ -325,7 +416,11 @@ def parse_log_file(filepath):
                             'message': message
                         })
                     else:
-                        print(f"[WARN] Skipping malformed line {total_lines}: {line[:100]}...")
+                        apache_entry = _parse_apache_combined_line(line)
+                        if apache_entry:
+                            valid_log_data.append(apache_entry)
+                        else:
+                            print(f"[WARN] Skipping malformed line {total_lines}: {line[:100]}...")
 
     except Exception as e:
         print(f"[ERROR] Failed to read or parse file {filepath}: {e}")
@@ -544,6 +639,28 @@ def train_and_evaluate(train_files, test_files=None, contamination_rate=0.15, mo
 
     print("\n--- Classification Report (on Unseen Test Set) ---")
     print(classification_report(y_test, preds_binary, digits=3))
+
+
+def load_artifacts(model_dir='.'):
+    """Load saved model, preprocessors, feature columns, and metadata."""
+    model_dir = os.path.abspath(model_dir)
+    try:
+        model = joblib.load(os.path.join(model_dir, "model.joblib"))
+        tfidf = joblib.load(os.path.join(model_dir, "tfidf.joblib"))
+        scaler = joblib.load(os.path.join(model_dir, "scaler.joblib"))
+        feature_columns = joblib.load(os.path.join(model_dir, "feature_columns.joblib"))
+    except FileNotFoundError as exc:
+        missing = exc.filename or "model artifacts"
+        raise FileNotFoundError(f"Missing required artifact: {missing}") from exc
+
+    meta = None
+    meta_path = os.path.join(model_dir, "model_meta.json")
+    if os.path.exists(meta_path):
+        with open(meta_path, "r", encoding="utf-8") as f:
+            meta = json.load(f)
+
+    return model, tfidf, scaler, feature_columns, meta
+
 
 def load_and_score(log_file_path, model_dir='.'):
     """
