@@ -1,0 +1,57 @@
+[
+  {
+    "_row_index": 21,
+    "label": 1,
+    "reason": "Repeated POST /login 401 from 45.12.33.100"
+  },
+  {
+    "_row_index": 22,
+    "label": 1,
+    "reason": "Repeated POST /login 401 from 45.12.33.100"
+  },
+  {
+    "_row_index": 23,
+    "label": 1,
+    "reason": "Repeated POST /login 401 from 45.12.33.100"
+  },
+  {
+    "_row_index": 24,
+    "label": 1,
+    "reason": "Repeated POST /login 401 from 45.12.33.100"
+  },
+  {
+    "_row_index": 25,
+    "label": 1,
+    "reason": "Repeated POST /login 401 from 45.12.33.100"
+  },
+  {
+    "_row_index": 47,
+    "label": 1,
+    "reason": "AuthService failed admin login from 118.99.50.12"
+  },
+  {
+    "_row_index": 48,
+    "label": 1,
+    "reason": "AuthService failed admin login from 118.99.50.12"
+  },
+  {
+    "_row_index": 49,
+    "label": 1,
+    "reason": "AuthService failed admin login from 118.99.50.12"
+  },
+  {
+    "_row_index": 50,
+    "label": 1,
+    "reason": "AuthService failed admin login from 118.99.50.12"
+  },
+  {
+    "_row_index": 51,
+    "label": 1,
+    "reason": "AuthService failed admin login from 118.99.50.12"
+  },
+  {
+    "_row_index": 63,
+    "label": 1,
+    "reason": "Illegal HTTP PUT to /assets/style.css returning 405"
+  }
+]

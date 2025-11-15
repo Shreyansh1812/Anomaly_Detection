@@ -44,6 +44,13 @@ Use the Colab notebook to upload a structured CSV and generate the “intel” r
 
 https://colab.research.google.com/github/Shreyansh1812/Anomaly_Detection/blob/feature/regex-analysis-only/Notebooks/Colab_Run_Report.ipynb
 
+## ML Evaluation Script
+
+- `ML/evaluate_trained_model.py` now emits anomaly metrics purely from the rule-based `LogAnomalyDetector`; no trained classifier artifacts are required.
+- Run it on one or more structured logs: `python ML/evaluate_trained_model.py --files Regex\Data\raw_logs\BGL_2k.log_structured.csv --out ML\reports\bgl_rule_eval.json`.
+- The rule engine drives the "List of Anomalies" and severity metrics—keeping `--disable-rule-detector` off ensures the report remains populated.
+- JSON reports still expose full `rule_based_hits` arrays so downstream automation can replay the reasons for every alert.
+
 ## Configuration (config.yaml)
 - reporting:
   - top_n_paths, top_n_large_paths, top_n_user_agents
