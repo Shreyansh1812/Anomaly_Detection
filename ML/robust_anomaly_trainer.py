@@ -142,6 +142,7 @@ import re
 import joblib
 from datetime import datetime
 import random
+from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
 
 # Scikit-learn imports
 from sklearn.ensemble import IsolationForest
@@ -151,6 +152,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.linear_model import LogisticRegression
 import json
+
+from src.anomaly_detection_engine import LogAnomalyDetector
 
 # --- 1. Robust Log Parsing ---
 
@@ -269,6 +272,31 @@ APACHE_TIMESTAMP_FIRST_REGEX = re.compile(
     r'(?P<status>\d{3})\s+(?P<size>\d+|-)'
     r'(?:\s+"(?P<user_agent>[^\"]*)")?\s*$'
 )
+
+_NUMERIC_DURATION_PATTERNS = (
+    re.compile(r"duration_ms\s*[:=]\s*(?P<value>\d+)", re.IGNORECASE),
+    re.compile(r"duration\s*[:=]\s*(?P<value>\d+)\s*ms", re.IGNORECASE),
+    re.compile(r"query\s*time\s*(?:exceeded|=)\s*(?P<value>\d+)\s*ms", re.IGNORECASE),
+    re.compile(r"latency\s*(?:is|=|:)\s*(?P<value>\d+)\s*ms", re.IGNORECASE),
+)
+_NUMERIC_BYTES_PATTERNS = (
+    re.compile(r"bytes\s*[:=]\s*(?P<value>\d+)", re.IGNORECASE),
+    re.compile(r"size\s*[:=]\s*(?P<value>\d+)", re.IGNORECASE),
+)
+_NUMERIC_STATUS_PATTERNS = (
+    re.compile(r"status\s*[:=]\s*(?P<value>\d{3})", re.IGNORECASE),
+)
+_SEVERITY_RANK = {
+    "DEBUG": 0,
+    "INFO": 0,
+    "NOTICE": 0,
+    "WARN": 1,
+    "WARNING": 1,
+    "ERROR": 2,
+    "ERR": 2,
+    "FATAL": 3,
+    "CRITICAL": 3,
+}
 
 
 def _format_apache_timestamp(raw_ts):
@@ -537,6 +565,94 @@ def extract_features(df, tfidf_vectorizer=None, scaler=None):
     assert len(final_features) == len(df), f"Feature row count {len(final_features)} != input row count {len(df)}"
     return final_features, tfidf_vectorizer, scaler
 
+
+def _coalesce_numeric_columns(df, column_names):
+    series = pd.Series(np.nan, index=df.index, dtype=float)
+    for name in column_names:
+        if name in df.columns:
+            candidate = pd.to_numeric(df[name], errors='coerce')
+            series = series.fillna(candidate)
+    return series
+
+
+def _extract_numeric_from_text(message_series, patterns):
+    result = pd.Series(np.nan, index=message_series.index, dtype=float)
+    for pattern in patterns:
+        extracted = message_series.str.extract(pattern, expand=False)
+        candidate = pd.to_numeric(extracted, errors='coerce')
+        result = result.fillna(candidate)
+    return result
+
+
+def build_numeric_feature_frame(
+    df,
+    scaler=None,
+    feature_order: Optional[List[str]] = None,
+    allowed_columns: Optional[Sequence[str]] = None,
+):
+    """Return low-dimensional numeric features for isolation forests.
+
+    The feature set intentionally stays compact (message length, bytes transferred,
+    HTTP status, duration, and severity flags) so we can train unsupervised models
+    without TF-IDF or high-dimensional sparse vectors.
+    """
+    if df is None or df.empty:
+        return pd.DataFrame(), scaler, feature_order or []
+
+    working = df.copy().reset_index(drop=True)
+    message_series = working.get('message', pd.Series('', index=working.index)).fillna('')
+    log_levels = working.get('log_level', pd.Series('', index=working.index)).fillna('')
+
+    features = pd.DataFrame(index=working.index)
+    features['message_length'] = message_series.str.len().astype(float)
+
+    response_bytes = _coalesce_numeric_columns(working, ['response_bytes', 'bytes', 'size'])
+    response_bytes = response_bytes.fillna(_extract_numeric_from_text(message_series, _NUMERIC_BYTES_PATTERNS))
+    features['response_bytes'] = response_bytes.fillna(0.0)
+
+    http_status = _coalesce_numeric_columns(working, ['http_status', 'status_code', 'status'])
+    http_status = http_status.fillna(_extract_numeric_from_text(message_series, _NUMERIC_STATUS_PATTERNS))
+    features['http_status_code'] = http_status.fillna(0.0)
+
+    duration_ms = _coalesce_numeric_columns(working, ['duration_ms', 'latency_ms', 'elapsed_ms'])
+    duration_ms = duration_ms.fillna(_extract_numeric_from_text(message_series, _NUMERIC_DURATION_PATTERNS))
+    features['duration_ms'] = duration_ms.fillna(0.0)
+
+    severity_numeric = log_levels.str.upper().map(_SEVERITY_RANK).fillna(0).astype(float)
+    features['severity_level'] = severity_numeric
+    features['is_error_level'] = (severity_numeric >= 2).astype(float)
+
+    features = features.fillna(0.0)
+
+    # Determine column order for scaler alignment
+    if feature_order is None:
+        if scaler is not None and hasattr(scaler, 'feature_names_in_'):
+            feature_order = list(scaler.feature_names_in_)
+        else:
+            feature_order = list(features.columns)
+
+    for col in feature_order:
+        if col not in features.columns:
+            features[col] = 0.0
+    features = features[feature_order]
+
+    if allowed_columns:
+        allowed_columns = list(allowed_columns)
+        for col in allowed_columns:
+            if col not in features.columns:
+                features[col] = 0.0
+        features = features[allowed_columns]
+        feature_order = allowed_columns
+
+    if scaler is None:
+        scaler = MinMaxScaler()
+        scaled_values = scaler.fit_transform(features)
+    else:
+        scaled_values = scaler.transform(features)
+
+    scaled_df = pd.DataFrame(scaled_values, columns=list(feature_order), index=df.index)
+    return scaled_df, scaler, feature_order
+
 # --- 3. Training and Scoring Functions ---
 
 def train_and_evaluate(train_files, test_files=None, contamination_rate=0.15, model_type='iforest'):
@@ -641,6 +757,118 @@ def train_and_evaluate(train_files, test_files=None, contamination_rate=0.15, mo
     print(classification_report(y_test, preds_binary, digits=3))
 
 
+def train_numeric_iforest(
+    train_files,
+    test_files=None,
+    contamination_rate=0.05,
+    model_dir='.',
+    random_state=42,
+    feature_subset: Optional[Sequence[str]] = None,
+    filter_rule_anomalies: bool = False,
+):
+    """Train an IsolationForest on low-dimensional numeric features only.
+
+    If filter_rule_anomalies is True, the training set will exclude logs flagged by the
+    rule-based detector so the model learns only from residual "normal" traffic.
+    """
+    if not train_files:
+        print("[ERROR] No training files provided for numeric IsolationForest.")
+        return
+
+    train_frames = [parse_log_file(f) for f in train_files]
+    train_df = pd.concat(train_frames, ignore_index=True)
+    if train_df.empty:
+        print("[ERROR] Parsed training data is empty; aborting numeric IsolationForest training.")
+        return
+
+    anomaly_levels = {'WARN', 'ERROR', 'FATAL', 'CRITICAL'}
+    train_df['is_anomaly'] = train_df['log_level'].apply(lambda x: 1 if x in anomaly_levels else 0)
+
+    if test_files:
+        test_frames = [parse_log_file(f) for f in test_files]
+        test_df = pd.concat(test_frames, ignore_index=True)
+        if test_df.empty:
+            print("[ERROR] Parsed test data is empty; aborting numeric IsolationForest training.")
+            return
+        test_df['is_anomaly'] = test_df['log_level'].apply(lambda x: 1 if x in ['WARN', 'ERROR'] else 0)
+        X_train_raw = train_df.drop('is_anomaly', axis=1)
+        y_train = train_df['is_anomaly']
+        X_test_raw = test_df.drop('is_anomaly', axis=1)
+        y_test = test_df['is_anomaly']
+        print(f"\n[NUMERIC IF] train={len(train_df)} | external test={len(test_df)}")
+    else:
+        y = train_df['is_anomaly']
+        strat = y if y.nunique() > 1 else None
+        X_train_raw, X_test_raw, y_train, y_test = train_test_split(
+            train_df.drop('is_anomaly', axis=1),
+            y,
+            test_size=0.25,
+            random_state=random_state,
+            stratify=strat,
+        )
+        print(f"\n[NUMERIC IF] total={len(train_df)} | train={len(X_train_raw)} | test={len(X_test_raw)}")
+
+    if filter_rule_anomalies:
+        detector = LogAnomalyDetector()
+        enriched = X_train_raw.copy()
+        enriched['_row_index'] = X_train_raw.index
+        records: List[Dict[str, Any]] = cast(List[Dict[str, Any]], enriched.to_dict(orient='records'))
+        rule_hits = detector.detect(records)
+        flagged_indices = {
+            hit.get('log', {}).get('_row_index')
+            for hit in rule_hits
+            if isinstance(hit.get('log'), dict)
+        }
+        flagged_indices = sorted(idx for idx in flagged_indices if idx is not None)
+        if flagged_indices:
+            X_train_raw = X_train_raw.drop(index=flagged_indices, errors='ignore')
+            y_train = y_train.drop(index=flagged_indices, errors='ignore')
+            print(
+                f"[NUMERIC IF] Filtered {len(flagged_indices)} rule-flagged rows; training rows={len(X_train_raw)}"
+            )
+        if X_train_raw.empty:
+            print("[NUMERIC IF] No training data remains after rule filtering; aborting.")
+            return
+
+    train_numeric, scaler, feature_order = build_numeric_feature_frame(
+        X_train_raw,
+        allowed_columns=feature_subset,
+    )
+    test_numeric, _, _ = build_numeric_feature_frame(
+        X_test_raw,
+        scaler=scaler,
+        feature_order=feature_order,
+        allowed_columns=feature_subset,
+    )
+
+    model = IsolationForest(
+        n_estimators=256,
+        contamination=contamination_rate,
+        random_state=random_state,
+    )
+    model.fit(train_numeric)
+    print("[NUMERIC IF] Model training complete.")
+
+    preds = model.predict(test_numeric)
+    preds_binary = np.where(preds == -1, 1, 0)
+    print("\n[NUMERIC IF] Classification report (heuristic labels):")
+    print(classification_report(y_test, preds_binary, digits=3, zero_division=0))
+
+    os.makedirs(model_dir, exist_ok=True)
+    joblib.dump(model, os.path.join(model_dir, "iforest_numeric.joblib"))
+    joblib.dump(scaler, os.path.join(model_dir, "numeric_scaler.joblib"))
+    joblib.dump(feature_order, os.path.join(model_dir, "numeric_feature_columns.joblib"))
+    meta = {
+        "type": "numeric_iforest",
+        "contamination": contamination_rate,
+        "feature_order": feature_order,
+        "filter_rule_anomalies": filter_rule_anomalies,
+    }
+    with open(os.path.join(model_dir, "numeric_model_meta.json"), "w", encoding="utf-8") as f:
+        json.dump(meta, f, indent=2)
+    print(f"[NUMERIC IF] Saved artifacts to {os.path.abspath(model_dir)}")
+
+
 def load_artifacts(model_dir='.'):
     """Load saved model, preprocessors, feature columns, and metadata."""
     model_dir = os.path.abspath(model_dir)
@@ -735,19 +963,38 @@ if __name__ == "__main__":
     else:
         train_files_input = input("Enter paths to your TRAINING log files (comma-separated): ").strip()
         test_files_input = input("Optionally, enter paths to your TEST log files (comma-separated, leave blank to auto-split): ").strip()
-        model_choice = input("Model type - IsolationForest (i) or Supervised (s)? [i/s, default i]: ").strip().lower()
+        model_choice = input(
+            "Model type - IsolationForest (i), Numeric IsolationForest (n), or Supervised (s)? [i/n/s, default i]: "
+        ).strip().lower()
         if not train_files_input:
             print("No training files provided. Exiting.")
         else:
             train_file_list = [f.strip() for f in train_files_input.split(',') if f.strip()]
             test_file_list = [f.strip() for f in test_files_input.split(',') if f.strip()] if test_files_input else None
-            mtype = 'supervised' if model_choice == 's' else 'iforest'
-            if mtype == 'iforest':
+            if model_choice == 's':
+                train_and_evaluate(train_file_list, test_files=test_file_list, model_type='supervised')
+            elif model_choice == 'n':
+                cont_in = input("Set contamination (0.01-0.30, default 0.05): ").strip()
+                try:
+                    cont = float(cont_in) if cont_in else 0.05
+                except Exception:
+                    cont = 0.05
+                out_dir = input("Directory to store numeric artifacts (default .): ").strip() or '.'
+                train_numeric_iforest(
+                    train_file_list,
+                    test_files=test_file_list,
+                    contamination_rate=cont,
+                    model_dir=out_dir,
+                )
+            else:
                 cont_in = input("Set contamination (0.01-0.30, default 0.15): ").strip()
                 try:
                     cont = float(cont_in) if cont_in else 0.15
                 except Exception:
                     cont = 0.15
-                train_and_evaluate(train_file_list, test_files=test_file_list, contamination_rate=cont, model_type=mtype)
-            else:
-                train_and_evaluate(train_file_list, test_files=test_file_list, model_type=mtype)
+                train_and_evaluate(
+                    train_file_list,
+                    test_files=test_file_list,
+                    contamination_rate=cont,
+                    model_type='iforest',
+                )

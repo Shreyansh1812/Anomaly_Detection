@@ -21,7 +21,7 @@ from collections import defaultdict, deque
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 import re
-from typing import Any, Deque, DefaultDict, Dict, Iterable, List, Optional
+from typing import Any, Deque, DefaultDict, Dict, Iterable, List, Optional, Set
 
 _TIMESTAMP_FORMATS = (
     "%Y-%m-%d %H:%M:%S,%f",
@@ -44,6 +44,14 @@ _FAILED_LOGIN_PATTERNS = (
 
 _IP_REGEX = re.compile(r"(?<!\d)(?:\d{1,3}\.){3}\d{1,3}(?!\d)")
 
+_HTTP_REQUEST_REGEX = re.compile(
+    r"\b(GET|POST|PUT|DELETE|CONNECT|PATCH|OPTIONS)\s+([^\s\"]+)",
+    re.IGNORECASE,
+)
+
+_DANGEROUS_HTTP_METHODS = {"PUT", "POST", "DELETE", "CONNECT"}
+_STATIC_FILE_EXTENSIONS = (".css", ".js", ".png", ".jpg", ".jpeg", ".svg", ".gif", ".ico")
+
 
 @dataclass
 class DetectionConfig:
@@ -54,9 +62,16 @@ class DetectionConfig:
         "xss",
         "/etc/passwd",
         "potential attack",
+        "nikto",
+        "nmap",
+        "sqlmap",
+        "zap",
+        "arachni",
     )
     duration_threshold_ms: int = 5000
     failed_login_threshold: int = 5
+    http_failed_login_threshold: int = 2
+    auth_failed_login_threshold: int = 2
     failed_login_window: timedelta = field(default_factory=lambda: timedelta(seconds=60))
 
 
@@ -65,7 +80,9 @@ class LogAnomalyDetector:
 
     def __init__(self, config: Optional[DetectionConfig] = None) -> None:
         self.config = config or DetectionConfig()
-        self._failed_login_history: DefaultDict[str, Deque[datetime]] = defaultdict(deque)
+        self._failed_login_history: DefaultDict[
+            str, DefaultDict[str, Deque[tuple[datetime, int]]]
+        ] = defaultdict(lambda: defaultdict(deque))
 
     def reset_state(self) -> None:
         self._failed_login_history.clear()
@@ -74,9 +91,13 @@ class LogAnomalyDetector:
         """Return a list of anomaly records with detection reasons."""
         self.reset_state()
         # Sort logs by timestamp to make the frequency detector reliable
-        sorted_logs = sorted(logs, key=lambda log: self._parse_timestamp(log.get("timestamp")))
+        sorted_logs = sorted(
+            logs,
+            key=lambda log: self._parse_timestamp(log.get("timestamp")) or datetime.min,
+        )
+        failed_login_indices = self._collect_failed_login_indices(sorted_logs)
         anomalies: List[Dict[str, Any]] = []
-        for entry in sorted_logs:
+        for idx, entry in enumerate(sorted_logs):
             ts = self._parse_timestamp(entry.get("timestamp"))
             reasons: List[str] = []
 
@@ -89,8 +110,11 @@ class LogAnomalyDetector:
             if self._is_statistical_anomaly(entry):
                 reasons.append("slow_operation")
 
-            if self._is_frequency_anomaly(entry, ts):
+            if idx in failed_login_indices:
                 reasons.append("failed_login_burst")
+
+            if self._is_anomalous_http_method(entry):
+                reasons.append("anomalous_http_method")
 
             if reasons:
                 anomalies.append(
@@ -125,22 +149,92 @@ class LogAnomalyDetector:
                     continue
         return False
 
-    def _is_frequency_anomaly(self, entry: Dict[str, Any], timestamp: Optional[datetime]) -> bool:
-        if timestamp is None:
-            return False
-        message = str(entry.get("message", ""))
-        if not any(pat.search(message) for pat in _FAILED_LOGIN_PATTERNS):
-            return False
-        ip = self._extract_ip(entry)
-        if not ip:
-            return False
+    def _collect_failed_login_indices(self, logs: List[Dict[str, Any]]) -> Set[int]:
+        flagged: Set[int] = set()
+        history: DefaultDict[str, DefaultDict[str, Deque[tuple[datetime, int]]]] = self._failed_login_history
+        history.clear()
+        for idx, entry in enumerate(logs):
+            ts = self._parse_timestamp(entry.get("timestamp"))
+            if ts is None:
+                continue
+            message = str(entry.get("message", ""))
+            category = self._classify_failed_login(entry, message)
+            if not category:
+                continue
+            ip = self._extract_ip(entry)
+            if not ip:
+                continue
+            threshold = self._threshold_for_failed_login(category)
+            if threshold <= 0:
+                continue
+            dq = history[ip][category]
+            dq.append((ts, idx))
+            window_start = ts - self.config.failed_login_window
+            while dq and dq[0][0] < window_start:
+                dq.popleft()
+            if len(dq) >= threshold:
+                flagged.update(hit_idx for _, hit_idx in dq)
+        return flagged
 
-        history = self._failed_login_history[ip]
-        window_start = timestamp - self.config.failed_login_window
-        while history and history[0] < window_start:
-            history.popleft()
-        history.append(timestamp)
-        return len(history) >= self.config.failed_login_threshold
+    def _classify_failed_login(self, entry: Dict[str, Any], message: str) -> Optional[str]:
+        if any(pat.search(message) for pat in _FAILED_LOGIN_PATTERNS):
+            return "auth"
+        module = str(entry.get("module", "")).upper()
+        status_code = self._extract_status_code(entry)
+        if module == "HTTP_ACCESS" and status_code == 401:
+            return "http"
+        return None
+
+    def _threshold_for_failed_login(self, category: str) -> int:
+        if category == "http":
+            return self.config.http_failed_login_threshold or self.config.failed_login_threshold
+        if category == "auth":
+            return self.config.auth_failed_login_threshold or self.config.failed_login_threshold
+        return self.config.failed_login_threshold
+
+    def _extract_status_code(self, entry: Dict[str, Any]) -> Optional[int]:
+        for key in ("http_status", "status", "status_code"):
+            value = entry.get(key)
+            if value is None:
+                continue
+            try:
+                return int(value)
+            except (TypeError, ValueError):
+                continue
+        message = str(entry.get("message", ""))
+        match = re.search(r"status=(\d{3})", message)
+        if match:
+            try:
+                return int(match.group(1))
+            except ValueError:
+                return None
+        return None
+
+    def _is_anomalous_http_method(self, entry: Dict[str, Any]) -> bool:
+        module = str(entry.get("module", "")).upper()
+        if module != "HTTP_ACCESS":
+            return False
+        method, path = self._extract_http_method_and_path(entry)
+        if not method or not path:
+            return False
+        method = method.upper()
+        normalized_path = path.lower().split("?", 1)[0]
+        return method in _DANGEROUS_HTTP_METHODS and any(
+            normalized_path.endswith(ext) for ext in _STATIC_FILE_EXTENSIONS
+        )
+
+    def _extract_http_method_and_path(self, entry: Dict[str, Any]) -> tuple[str, str]:
+        method = str(entry.get("http_method") or entry.get("method") or "").upper()
+        path = str(entry.get("path") or "")
+        if method and path:
+            return method, path
+        message = str(entry.get("message", ""))
+        match = _HTTP_REQUEST_REGEX.search(message)
+        if not method and match:
+            method = match.group(1).upper()
+        if not path and match:
+            path = match.group(2)
+        return method, path
 
     # --- Utilities ---------------------------------------------------------
     def _parse_timestamp(self, value: Any) -> Optional[datetime]:

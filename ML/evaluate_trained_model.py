@@ -6,14 +6,14 @@ import os
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Sequence
 
 import numpy as np
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.exceptions import InconsistentVersionWarning
+import joblib
 try:
-    from sklearn.exceptions import InconsistentVersionWarning
+    from sklearn.exceptions import InconsistentVersionWarning  # type: ignore
 except (ImportError, AttributeError):
     class InconsistentVersionWarning(UserWarning):
         """Fallback warning when running on older/newer scikit-learn versions."""
@@ -25,7 +25,7 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from ML.robust_anomaly_trainer import parse_log_file
+from ML.robust_anomaly_trainer import build_numeric_feature_frame, parse_log_file
 from src.anomaly_detection_engine import LogAnomalyDetector
 
 warnings.filterwarnings("ignore", category=InconsistentVersionWarning)
@@ -40,6 +40,38 @@ SUGGESTION_MAP = {
     "kernel": "Kernel/system faults—inspect hardware resources and recent kernel changes.",
     "httpd": "HTTP service anomalies—inspect web server configs and client behavior.",
 }
+
+NUMERIC_FEATURE_SUBSET: Sequence[str] = ("message_length", "response_bytes")
+
+
+def load_numeric_artifacts(model_dir: Optional[str]):
+    if not model_dir:
+        return None
+    base = Path(model_dir)
+    try:
+        model = joblib.load(base / "iforest_numeric.joblib")
+        scaler = joblib.load(base / "numeric_scaler.joblib")
+        feature_columns = joblib.load(base / "numeric_feature_columns.joblib")
+    except FileNotFoundError as exc:
+        missing = exc.filename or str(exc)
+        print(f"[WARN] Numeric artifacts missing ({missing}); ML engine disabled.")
+        return None
+
+    meta_path = base / "numeric_model_meta.json"
+    meta = None
+    if meta_path.exists():
+        try:
+            with open(meta_path, "r", encoding="utf-8") as fh:
+                meta = json.load(fh)
+        except json.JSONDecodeError:
+            meta = None
+
+    return {
+        "model": model,
+        "scaler": scaler,
+        "feature_columns": feature_columns,
+        "meta": meta,
+    }
 
 
 def count_file_lines(path: str) -> int:
@@ -81,9 +113,35 @@ def format_anomaly_entries(df_subset: pd.DataFrame):
     return entries
 
 
+def _to_detector_record(row: pd.Series) -> Dict[str, Any]:
+    record = {
+        "timestamp": str(row.get("timestamp", "")),
+        "log_level": str(row.get("log_level", "")),
+        "module": str(row.get("module", "")),
+        "message": str(row.get("message", "")),
+        "_row_index": int(row.get("_row_index", 0)),
+    }
+    for ip_field in ("ip", "client_ip", "source_ip"):
+        if ip_field in row.index and row.get(ip_field) is not None:
+            record[ip_field] = row.get(ip_field)
+    if "http_status" in row.index and row.get("http_status") is not None:
+        record["http_status"] = row.get("http_status")
+    if "response_bytes" in row.index and row.get("response_bytes") is not None:
+        record["response_bytes"] = row.get("response_bytes")
+    if "http_method" in row.index and row.get("http_method") is not None:
+        record["http_method"] = row.get("http_method")
+    if "path" in row.index and row.get("path") is not None:
+        record["path"] = row.get("path")
+    return record
+
+
 def evaluate_on_file(
     path: str,
     detector: Optional[LogAnomalyDetector] = None,
+    numeric_model=None,
+    numeric_scaler=None,
+    numeric_feature_columns: Optional[Sequence[str]] = None,
+    numeric_feature_subset: Sequence[str] = NUMERIC_FEATURE_SUBSET,
 ):
     df = parse_log_file(path)
     if df.empty:
@@ -97,30 +155,57 @@ def evaluate_on_file(
     detector_records: List[Dict[str, Any]] = []
     if detector is not None:
         enriched = df.reset_index().rename(columns={"index": "_row_index"})
-        for _, row in enriched.iterrows():
-            record = {
-                "timestamp": str(row.get("timestamp", "")),
-                "log_level": str(row.get("log_level", "")),
-                "module": str(row.get("module", "")),
-                "message": str(row.get("message", "")),
-                "_row_index": int(row.get("_row_index", 0)),
-            }
-            for ip_field in ("ip", "client_ip", "source_ip"):
-                if ip_field in row.index:
-                    record[ip_field] = row.get(ip_field)
-            detector_records.append(record)
+        detector_records = [_to_detector_record(row) for _, row in enriched.iterrows()]
 
     rule_based_hits = detector.detect(detector_records) if detector else []
 
     preds_binary = np.zeros(len(df), dtype=int)
+    final_hits: List[Dict[str, Any]] = []
+    flagged_indices = set()
     for hit in rule_based_hits:
+        hit["source"] = "rule"
         row_idx = hit.get("log", {}).get("_row_index")
-        if row_idx is None:
-            continue
-        try:
-            preds_binary[int(row_idx)] = 1
-        except (ValueError, IndexError):
-            continue
+        if row_idx is not None:
+            try:
+                idx_int = int(row_idx)
+            except (TypeError, ValueError):
+                idx_int = None
+            if idx_int is not None and 0 <= idx_int < len(df):
+                preds_binary[idx_int] = 1
+                flagged_indices.add(idx_int)
+        final_hits.append(hit)
+
+    ml_hits: List[Dict[str, Any]] = []
+    if numeric_model is not None and numeric_scaler is not None and numeric_feature_columns is not None:
+        normal_mask = ~df.index.isin(flagged_indices)
+        residual_df = df[normal_mask].copy()
+        residual_df["_row_index"] = residual_df.index
+        residual_df["module"] = residual_df["module"].fillna("")
+        http_mask = residual_df["module"].str.upper() == "HTTP_ACCESS"
+        candidate_df = residual_df[http_mask]
+        if not candidate_df.empty:
+            numeric_frame, _, _ = build_numeric_feature_frame(
+                candidate_df,
+                scaler=numeric_scaler,
+                feature_order=list(numeric_feature_columns),
+                allowed_columns=list(numeric_feature_subset),
+            )
+            if not numeric_frame.empty:
+                preds = numeric_model.predict(numeric_frame)
+                anomaly_mask = preds == -1
+                anomaly_indices = numeric_frame.index[anomaly_mask]
+                for idx in anomaly_indices:
+                    row = df.loc[idx]
+                    log_payload = {**{k: v for k, v in row.items() if k != "is_anomaly"}, "_row_index": int(idx)}
+                    preds_binary[idx] = 1
+                    ml_hits.append(
+                        {
+                            "source": "ml",
+                            "reasons": ["numeric_iforest"],
+                            "log": log_payload,
+                        }
+                    )
+    final_hits.extend(ml_hits)
 
     report = classification_report(
         df["is_anomaly"], preds_binary, output_dict=True, zero_division=0
@@ -143,12 +228,12 @@ def evaluate_on_file(
             "total": int(len(df)),
             "true_anomalies": int(df["is_anomaly"].sum()),
             "predicted_anomalies": int((preds_binary == 1).sum()),
-            "rule_alerts": len(rule_based_hits),
+            "rule_alerts": len(final_hits),
             "severity_alerts": int(severity_alerts),
         },
         "anomaly_entries": format_anomaly_entries(anomaly_rows),
         "root_cause": summarize_root_cause(anomaly_rows),
-        "rule_based_hits": rule_based_hits,
+        "rule_based_hits": final_hits,
     }
 
 
@@ -177,15 +262,35 @@ def main():
         action="store_true",
         help="Skip the rule-based LogAnomalyDetector augmentation.",
     )
+    parser.add_argument(
+        "--numeric-model-dir",
+        default="models/numeric_baseline",
+        help="Directory containing the numeric IsolationForest artifacts.",
+    )
+    parser.add_argument(
+        "--disable-ml-detector",
+        action="store_true",
+        help="Skip the numeric IsolationForest stage.",
+    )
     args = parser.parse_args()
 
     detector = None if args.disable_rule_detector else LogAnomalyDetector()
+    numeric_artifacts = None
+    if not args.disable_ml_detector and args.numeric_model_dir:
+        numeric_artifacts = load_numeric_artifacts(args.numeric_model_dir)
 
     results = []
     for f in args.files:
         res = evaluate_on_file(
             f,
             detector=detector,
+            numeric_model=(numeric_artifacts or {}).get("model") if numeric_artifacts else None,
+            numeric_scaler=(numeric_artifacts or {}).get("scaler") if numeric_artifacts else None,
+            numeric_feature_columns=(numeric_artifacts or {}).get("feature_columns") if numeric_artifacts else None,
+            numeric_feature_subset=(
+                tuple((numeric_artifacts or {}).get("meta", {}).get("feature_order", ()))
+                or NUMERIC_FEATURE_SUBSET
+            ),
         )
         if res:
             results.append(res)
@@ -216,13 +321,14 @@ def main():
             print("(No anomalies were flagged for this file.)")
 
         if res.get("rule_based_hits"):
-            print("\nRule-based detector alerts:")
+            print("\nHybrid detector alerts (rule + ml):")
             for idx, hit in enumerate(res["rule_based_hits"], 1):
-                reasons = ",".join(hit.get("reasons", []))
+                reasons = ",".join(hit.get("reasons", [])) or "(no reasons)"
                 msg = hit.get("log", {}).get("message", "")
-                print(f"{idx}. [{reasons}] {msg}")
+                source = hit.get("source", "unknown")
+                print(f"{idx}. ({source}) [{reasons}] {msg}")
         else:
-            print("\nRule-based detector alerts: (none)")
+            print("\nHybrid detector alerts: (none)")
 
         root = res["root_cause"]
         print(
